@@ -1,0 +1,53 @@
+<div class="jumbotron">
+  <h1>PRT <span class="text-muted">Tracker</span></h1>
+  <p>Record and track your progress on the PRT (Physical Readiness Test) exercises:</p>
+  <ul>
+    <li>Sit ups</li>
+    <li>Push ups</li>
+    <li>Pull ups</li>
+    <li>1.5 Mile Run</li>
+  </ul>
+  <div data-ng-if='!home.currentUser'>
+    <button class="btn btn-primary" data-ui-sref='signin'>Sign In</button>
+    <button class="btn btn-toggle" data-ui-sref='signup'>Register</button>
+  </div>
+</div>
+
+<!-- Not logged in section-->
+<div data-ng-if="!home.currentUser" data-ng-include="'/home/home-guest.tpl.html'"/>
+<!-- End not logged in section -->
+
+<!-- Logged in section -->
+<div data-ng-if='home.currentUser' class="row featurette">
+  <div class="col-md-12">
+    <h4>Hi, {{home.currentUser.email}}!</h4>
+
+    <alert data-ng-if='!home.records'>No tries recorded yet. What are you waiting for?</alert>
+
+    <div data-ng-if='home.records'>
+      <p>Your current best tries:</p>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Result</th>
+            <th>Date</th </tr>
+        </thead>
+        <tbody>
+          <tr data-ng-repeat='record in home.records'>
+            <td>
+              <a data-ui-sref="item({categoryId:record.category._id})">
+                {{record.category.name}}
+              </a>
+              <a class="btn btn-small pull-right" tooltip="New Try" ng-click="home.addNew(record.category)">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Try
+              </a>
+            </td>
+            <td>{{record.valueNumber || record.valueTime}}</td>
+            <td>{{record.itemDateTime | date:'MM-dd-yyyy'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+{
+  "_id": "5645fd5662047212024e51c7",
+  "user": {
+    "_id": "5645fc71890ca80f02ae4dd7",
+    "name": "Brian"
+  },
+  "category": {
+    "_id": "5645fcd1a01ca905ef611b5c",
+    "name": "Push Ups",
+    "description": "Push ups in 2 minutes",
+    "dataType": "number",
+    "goalType": "most"
+  },
+  "itemValue": "20",
+  "notes": "First day at ST",
+  "__v": 0,
+  "itemDateTime": "2012-08-01T18:11:57.000Z"
+}

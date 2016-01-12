@@ -1,0 +1,68 @@
+<form
+  role="form"
+  name="itemModal.form"
+  ng-submit="itemModal.save()"
+  novalidate>
+  <h4 class="modal-header">Record a Try: {{itemModal.item.category.name}}</h4>
+
+  <div class="modal-body">
+    <alert data-ng-if="itemModal.errorMessage" type="danger" close="itemModal.errorMessage = null">
+      {{itemModal.errorMessage}}
+    </alert>
+
+    <div class="form-group" show-errors>
+      <label for="entryDate" class="control-label">Entry Date</label>
+      <input class="form-control"
+        data-ng-model="itemModal.item.itemDateTime"
+        name="entryDate"
+        type="date"
+        value="{{itemModal.item.itemDateTime | date:'yyyy-MM-dd'}}" required/>
+      <div class="help-block" ng-messages="itemModal.form.entryDate.$error" ng-messages-multiple>
+        <div ng-messages-include="item/item-form-messages.html"></div>
+      </div>
+    </div>
+
+    <div data-ng-if='itemModal.item.category.dataType === "number"'>
+      <div class="form-group" show-errors>
+        <label for="countScore" class="control-label">Number Completed</label>
+        <input class="form-control"
+          data-ng-model="itemModal.item.valueNumber"
+          name="countScore"
+          type="number"
+          min="0"
+          value="" required/>
+        <div class="help-block" ng-messages="itemModal.form.countScore.$error" ng-messages-multiple>
+          <div ng-messages-include="item/item-form-messages.html"></div>
+        </div>
+      </div>
+    </div>
+
+    <div data-ng-if='itemModal.item.category.dataType === "time"'>
+      <div class="form-group" show-errors>
+        <label for="timeScore" class="control-label">Time</label>
+        <input class="form-control"
+          data-ng-model="itemModal.item.valueTime"
+          name="timeScore"
+          type="text"
+          maxlength="5"
+          ng-pattern="/^[0-5][0-9]:[0-5][0-9]$/"
+          value="" required />
+        <div class="help-block" ng-messages="itemModal.form.timeScore.$error" ng-messages-multiple>
+          <div ng-messages-include="item/item-form-messages.html"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="note" class="control-label">Note</label>
+      <textarea class='form-control' data-ng-model='itemModal.item.notes' cols="20" maxlength='500' name="note" rows="2">
+        {{itemModal.item.notes}}
+      </textarea>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn" type="button" ng-click="itemModal.dismiss()">Cancel</button>
+    <button class="btn btn-primary" type="submit">Save</button>
+  </div>
+</form>

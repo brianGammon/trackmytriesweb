@@ -1,0 +1,30 @@
+[
+  {
+    "_id": "5645fcd1a01ca905ef611b5b",
+    "name": "Sit Ups",
+    "description": "Sit ups in 2 minutes",
+    "dataType": "number",
+    "goalType": "most"
+  },
+  {
+    "_id": "5645fcd1a01ca905ef611b5c",
+    "name": "Push Ups",
+    "description": "Push ups in 2 minutes",
+    "dataType": "number",
+    "goalType": "most"
+  },
+  {
+    "_id": "5645fcd1a01ca905ef611b5d",
+    "name": "Pull Ups",
+    "description": "Maximum number of pull ups",
+    "dataType": "number",
+    "goalType": "most"
+  },
+  {
+    "_id": "5645fcd1a01ca905ef611b5e",
+    "name": "1.5 Mile Run",
+    "description": "Time in minutes and seconds to run 1.5 miles",
+    "dataType": "time",
+    "goalType": "least"
+  }
+]
