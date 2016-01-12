@@ -18,6 +18,6 @@ describe('About page', function () {
 
   it('should have the correct heading and intro text', function () {
     expect(aboutPage.heading.getText()).to.eventually.equal('About');
-    expect(aboutPage.text.getText()).to.eventually.contain('PRT Tracker is a web application');
+    expect(aboutPage.text.getText()).to.eventually.contain('Track My Tries is a web application');
   });
 });

@@ -17,6 +17,6 @@ describe('Global header tests', function () {
   });
 
   it('should say PRT Tracker in the brand', function () {
-    expect(header.brand.getText()).to.eventually.equal('PRT Tracker');
+    expect(header.brand.getText()).to.eventually.equal('Track My Tries');
   });
 });

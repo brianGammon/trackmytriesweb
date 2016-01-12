@@ -17,7 +17,7 @@ describe('Home page', function () {
   });
 
   it('should say HomeCtrl', function () {
-    expect(homePage.heading.getText()).to.eventually.equal('PRT Tracker');
-    expect(homePage.introText.getText()).to.eventually.contain('Record and track your progress on the PRT');
+    expect(homePage.heading.getText()).to.eventually.equal('Track My Tries');
+    expect(homePage.introText.getText()).to.eventually.contain('Record each of your "Tries" and track your');
   });
 });
