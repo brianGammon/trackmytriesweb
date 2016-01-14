@@ -2,12 +2,12 @@
   'use strict';
 
   /* @ngdoc object
-   * @name prttrackerweb
+   * @name trackmytriesweb
    * @description
    *
    */
   angular
-    .module('prttrackerweb', [
+    .module('trackmytriesweb', [
       'ui.router',
       'ui.bootstrap',
       'chart.js',

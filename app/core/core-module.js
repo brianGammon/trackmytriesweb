@@ -10,6 +10,6 @@
     .module('core', [
       'ui.router'
     ])
-    .constant('API', 'https://prttrackerapi-dev.herokuapp.com');
-    // .constant('API', 'http://localhost:8080');
+    // .constant('API', 'https://prttrackerapi-dev.herokuapp.com');
+    .constant('API', 'http://localhost:8080');
 }());

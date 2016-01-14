@@ -7,7 +7,8 @@ var _ = require('underscore.string')
   , bowerDir = JSON.parse(fs.readFileSync('.bowerrc')).directory + path.sep;
 
 module.exports = function (gulp, $, config) {
-  var isProd = $.yargs.argv.stage === 'prod';
+  var isProd = $.yargs.argv.stage === 'prod',
+      useCloudApi = $.yargs.argv.api === 'cloud';
 
   // delete build directory
   gulp.task('clean', function () {
@@ -258,10 +259,6 @@ module.exports = function (gulp, $, config) {
       });
   });
 
-  // gulp.task('copysampledata', ['clean'], function() {
-  //  gulp.src(config.appSampleDataFiles)
-  //  .pipe(gulp.dest(config.buildDir));
-  // });
   gulp.task('copyserver', ['clean'], function(){
     gulp.src(config.rootDir + '/server.js')
     .pipe(gulp.dest(config.outDir));

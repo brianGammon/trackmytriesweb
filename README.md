@@ -25,8 +25,8 @@ npm install -g gulp bower
 Clone the repo into your projects directory:
 
 ```
-git clone https://brianGammon@bitbucket.org/brianGammon/prttrackerweb.git
-cd prttrackerweb
+git clone https://github.com/brianGammon/trackmytriesweb.git
+cd trackmytriesweb
 
 
 ```
