@@ -8,7 +8,7 @@ var _ = require('underscore.string')
 
 module.exports = function (gulp, $, config) {
   var isProd = $.yargs.argv.stage === 'prod',
-      useCloudApi = $.yargs.argv.api === 'cloud';
+      api = process.env.API || $.yargs.argv.api;
 
   // delete build directory
   gulp.task('clean', function () {
@@ -94,6 +94,15 @@ module.exports = function (gulp, $, config) {
       .pipe($.sourcemaps.write('.'))
       .pipe(gulp.dest(config.buildJs))
       .pipe(jsFilter.restore);
+  });
+
+  // set the api to the right endpoint, if passed in or set in process.env
+  gulp.task('api', ['deleteTemplates'], function () {
+    if (api) {
+      gulp.src([config.buildJs + '/core/*module.js*'])
+        .pipe($.replace('http://localhost:8080', api))
+        .pipe(gulp.dest(config.buildJs + '/core'));
+    }
   });
 
   // inject custom CSS and JavaScript into index.html
@@ -265,7 +274,7 @@ module.exports = function (gulp, $, config) {
   });
 
 
-  gulp.task('build', ['deleteTemplates', 'bowerAssets', 'images', 'favicon', 'fonts', 'copyserver']);
+  gulp.task('build', ['deleteTemplates', 'bowerAssets', 'images', 'favicon', 'fonts', 'api', 'copyserver']);
 
 
 };
