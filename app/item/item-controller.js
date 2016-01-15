@@ -75,11 +75,14 @@
         Item.getItems(categoryId)
           .then(function (items) {
             vm.items = items;
-            buildChartData();
+            if (items.length > 0) {
+              buildChartData();
+              refreshPr();
+            }
           })
           .catch(onError);
 
-        refreshPr();
+
       })
       .catch(onError);
 
