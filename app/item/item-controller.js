@@ -81,8 +81,6 @@
             }
           })
           .catch(onError);
-
-
       })
       .catch(onError);
 

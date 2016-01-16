@@ -96,15 +96,6 @@ module.exports = function (gulp, $, config) {
       .pipe(jsFilter.restore);
   });
 
-  // set the api to the right endpoint, if passed in or set in process.env
-  gulp.task('api', ['deleteTemplates'], function () {
-    if (api) {
-      gulp.src([config.buildJs + '/core/*module.js*'])
-        .pipe($.replace('http://localhost:8080', api))
-        .pipe(gulp.dest(config.buildJs + '/core'));
-    }
-  });
-
   // inject custom CSS and JavaScript into index.html
   gulp.task('inject', ['markup', 'styles', 'scripts'], function () {
     var jsFilter = $.filter('**/*.js', {restore: true});
@@ -268,6 +259,15 @@ module.exports = function (gulp, $, config) {
       });
   });
 
+  // set the api to the right endpoint, if passed in or set in process.env
+  gulp.task('api', ['deleteTemplates'], function () {
+    if (api) {
+      gulp.src([config.buildJs + '/core/*module.js*'])
+        .pipe($.replace('http://localhost:8080', api))
+        .pipe(gulp.dest(config.buildJs + '/core'));
+    }
+  });
+  
   gulp.task('copyserver', ['clean'], function(){
     gulp.src(config.rootDir + '/server.js')
     .pipe(gulp.dest(config.outDir));
