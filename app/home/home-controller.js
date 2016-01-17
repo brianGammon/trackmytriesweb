@@ -12,14 +12,8 @@
     .module('home')
     .controller('HomeCtrl', HomeCtrl);
 
-  function HomeCtrl(currentUser, Item, $modal) {
+  function HomeCtrl(currentUser, Item, $modal, ngToast) {
     var vm = this;
-
-    function refreshPrs() {
-      Item.getRecords().then(function (records) {
-        vm.records = records;
-      });
-    }
 
     vm.currentUser = currentUser;
     if (vm.currentUser) {
@@ -45,9 +39,32 @@
             return category;
           }
         }
-      }).result.then(function () {
-        refreshPrs();
+      }).result.then(function (item) {
+        popMessage(item);
+        refreshPrs(item);
       });
     };
+
+    function popMessage(item) {
+      ngToast.create({
+        className: 'info',
+        content: 'Saved new ' + item.category.name + ' Try'
+      });
+    }
+
+    function refreshPrs(item) {
+      Item.getRecords().then(function (records) {
+        vm.records = records;
+        angular.forEach(records, function (value) {
+          if (value._id === item._id) {
+            ngToast.create({
+              className: 'success',
+              content: '<strong>Congratulations!</strong><br>That\'s a new ' + item.category.name + ' PR!',
+              timeout: 5000
+            });
+          }
+        });
+      });
+    }
   }
 }());

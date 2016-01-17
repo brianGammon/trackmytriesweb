@@ -13,6 +13,7 @@
       'chart.js',
       'ngStorage',
       'ngMessages',
+      'ngToast',
       'home',
       'about',
       'user',
