@@ -16,7 +16,6 @@
     var vm = this;
 
     vm.item = item;
-    vm.item.itemDateTime = new Date(item.itemDateTime);
 
     vm.dismiss = function () {
       $modalInstance.dismiss();
@@ -27,8 +26,10 @@
 
       if (vm.form.$valid) {
         Item.updateItem(vm.item)
-          .then(function () {
-            $modalInstance.close(vm.item);
+          .then(function (updatedItem) {
+            // JavaScript DateTime fix
+            updatedItem.itemDateTime = new Date(updatedItem.itemDateTime);
+            $modalInstance.close(updatedItem);
           })
           .catch(function (err) {
             vm.errorMessage = err.data ? err.data : 'An unknown error has occurred';

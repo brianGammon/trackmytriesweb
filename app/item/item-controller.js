@@ -12,25 +12,95 @@
     .module('item')
     .controller('ItemCtrl', ItemCtrl);
 
-  function ItemCtrl(Item, currentUser, Category, $stateParams, $state, $filter, $scope, $modal, $window) {
+  function ItemCtrl(Item, currentUser, Category, $stateParams, $filter, $modal, $window, ngToast) {
     var vm = this,
         categoryId = $stateParams.categoryId;
 
-    function onError(err) {
-      vm.errorMessage = err.data ? err.data : 'An unknown error has occurred';
-    }
+    Category.getCategory(categoryId)
+      .then(function (category) {
+        vm.category = category;
 
-    function secondsToHms(d) {
-      var h = Math.floor(Number(d) / 3600),
-          m = Math.floor(Number(d) % 3600 / 60),
-          s = Math.floor(Number(d) % 3600 % 60);
-      return (h > 0 ? h + ':' + (m < 10 ? '0' : '') : '') + m + ':' + (s < 10 ? '0' : '') + s;
-    }
+        Item.getItems(categoryId)
+          .then(function (items) {
+            vm.items = items;
+            if (items.length > 0) {
+              buildChartData();
+              refreshPr();
+            }
+          })
+          .catch(onError);
+      })
+      .catch(onError);
 
-    function refreshPr() {
+    vm.edit = function (item) {
+      $modal.open({
+        templateUrl: 'item/item-modal.tpl.html',
+        controller: 'ItemEditCtrl',
+        controllerAs: 'itemModal',
+        resolve: {
+          item: function () {
+            return angular.copy(item);
+          }
+        }
+      }).result.then(function (updatedItem) {
+        var key;
+
+        // Map the updated copy to the original object
+        for (key in updatedItem) {
+          // Manually set notes in case original item didn't have any
+          if (item.hasOwnProperty(key) || key === 'notes') {
+            item[key] = updatedItem[key];
+          }
+        }
+
+        buildChartData();
+        refreshPr();
+      });
+    };
+
+    vm.addNew = function () {
+      $modal.open({
+        templateUrl: 'item/item-modal.tpl.html',
+        controller: 'ItemNewCtrl',
+        controllerAs: 'itemModal',
+        resolve: {
+          currentUser: function () {
+            return currentUser;
+          },
+          category: function () {
+            return vm.category;
+          }
+        }
+      }).result.then(function (savedItem) {
+        vm.items.push(savedItem);
+        buildChartData();
+        refreshPr(savedItem);
+      });
+    };
+
+    vm.delete = function (index) {
+      if ($window.confirm('Are you sure? Click OK to delete this Try.') === true) {
+        Item.deleteItem(vm.items[index]._id)
+          .then(function () {
+            vm.items.splice(index, 1);
+            buildChartData();
+            refreshPr();
+          })
+          .catch(function (err) {
+            onError(err);
+          });
+      }
+    };
+
+    function refreshPr(newItem) {
       Item.getRecord(categoryId)
         .then(function (record) {
           vm.personalRecord = record;
+
+          // If a new item was saved and passed in check if a message should be popped
+          if (newItem && newItem._id === record._id) {
+            ngToast.success('<strong>Congratulations!</strong> That\'s a new ' + record.category.name + ' PR!');
+          }
         })
         .catch(onError);
     }
@@ -68,78 +138,15 @@
       };
     }
 
-    Category.getCategory(categoryId)
-      .then(function (category) {
-        vm.category = category;
+    function onError(err) {
+      vm.errorMessage = err.data ? err.data : 'An unknown error has occurred';
+    }
 
-        Item.getItems(categoryId)
-          .then(function (items) {
-            vm.items = items;
-            if (items.length > 0) {
-              buildChartData();
-              refreshPr();
-            }
-          })
-          .catch(onError);
-      })
-      .catch(onError);
-
-    vm.edit = function (item) {
-      $modal.open({
-        templateUrl: 'item/item-modal.tpl.html',
-        controller: 'ItemEditCtrl',
-        controllerAs: 'itemModal',
-        resolve: {
-          item: function () {
-            return angular.copy(item);
-          }
-        }
-      }).result.then(function (updatedItem) {
-        // Map the updated copy to the original object
-        var key;
-        for (key in updatedItem) {
-          if (item.hasOwnProperty(key)) {
-            item[key] = updatedItem[key];
-          }
-        }
-
-        buildChartData();
-        refreshPr();
-      });
-    };
-
-    vm.addNew = function () {
-      $modal.open({
-        templateUrl: 'item/item-modal.tpl.html',
-        controller: 'ItemNewCtrl',
-        controllerAs: 'itemModal',
-        resolve: {
-          currentUser: function () {
-            return currentUser;
-          },
-          category: function () {
-            return vm.category;
-          }
-        }
-      }).result.then(function (savedItem) {
-        vm.items.push(savedItem);
-        buildChartData();
-        refreshPr();
-      });
-    };
-
-    vm.delete = function (index) {
-      if ($window.confirm('Are you sure? Click OK to delete this Try.') === true) {
-        Item.deleteItem(vm.items[index]._id)
-          .then(function () {
-            vm.items.splice(index, 1);
-            buildChartData();
-            refreshPr();
-          })
-          .catch(function (err) {
-            onError(err);
-          });
-      }
-    };
+    function secondsToHms(d) {
+      var h = Math.floor(Number(d) / 3600),
+          m = Math.floor(Number(d) % 3600 / 60),
+          s = Math.floor(Number(d) % 3600 % 60);
+      return (h > 0 ? h + ':' + (m < 10 ? '0' : '') : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    }
   }
 }());

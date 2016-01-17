@@ -34,7 +34,7 @@
             <th>Date</th </tr>
         </thead>
         <tbody>
-          <tr data-ng-repeat='record in home.records'>
+          <tr data-ng-repeat='record in home.records | orderBy:"category._id"'>
             <td>
               <a data-ui-sref="item({categoryId:record.category._id})">
                 {{record.category.name}}

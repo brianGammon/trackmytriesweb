@@ -46,24 +46,21 @@
     };
 
     function popMessage(item) {
-      ngToast.create({
-        className: 'info',
-        content: 'Saved new ' + item.category.name + ' Try'
-      });
+      ngToast.info('Saved new ' + item.category.name + ' Try');
     }
 
-    function refreshPrs(item) {
+    function refreshPrs(newItem) {
       Item.getRecords().then(function (records) {
         vm.records = records;
-        angular.forEach(records, function (value) {
-          if (value._id === item._id) {
-            ngToast.create({
-              className: 'success',
-              content: '<strong>Congratulations!</strong><br>That\'s a new ' + item.category.name + ' PR!',
-              timeout: 5000
-            });
-          }
-        });
+        if (newItem) {
+          angular.forEach(records, function (value) {
+            if (value._id === newItem._id) {
+              ngToast.success(
+                '<strong>Congratulations!</strong> That\'s a new ' + newItem.category.name + ' PR!'
+              );
+            }
+          });
+        }
       });
     }
   }
