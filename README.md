@@ -11,8 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 Make sure your system has the following foundational software installed:
 
 * NodeJS
-* MongoDB, or a Mongolab instance
-* TrackMyTries API access (default is localhost:8080)
+* [TrackMyTries API](https://github.com/brianGammon/trackmytriesapi) access (default is localhost:8080)
 * JDK (optional, for running e2e tests)
 
 Next, globally install bower and gulp:
@@ -27,8 +26,6 @@ Clone the repo into your projects directory:
 ```
 git clone https://github.com/brianGammon/trackmytriesweb.git
 cd trackmytriesweb
-
-
 ```
 
 Next, install the dependencies and launch:
@@ -58,17 +55,9 @@ gulp e2eTest
 ```
 For e2e tests to run, a localhost must be started first in a separate tab using ```gulp```.
 
-## Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
-
 ## Authors
 
-* **Brian Gammon** - *Initial work* - [Bitbucket](https://bitbucket.org/brianGammon)
+* **Brian Gammon** - *Initial work* - [GitHub](https://github.com/brianGammon)
 
 ## License
 
