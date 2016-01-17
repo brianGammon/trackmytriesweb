@@ -35,7 +35,7 @@
           <tr data-ng-repeat='itm in item.items' ng-class="{info: itm._id == item.personalRecord._id}">
             <td>{{itm.itemDateTime | date:'MM-dd-yyyy'}}</td>
             <td>
-              {{itm.valueNumber || itm.valueTime || 0}} <span data-ng-if='itm._id === item.personalRecord._id' class="label label-primary">PR</span>
+              {{itm.valueNumber || itm.valueTime || 0}} <span data-ng-if='itm._id === item.personalRecord._id' class="badge">PR</span>
               <a class="btn btn-small" ng-if="itm.notes">
                 <span tooltip="{{itm.notes}}" class="glyphicon glyphicon-comment" aria-hidden="true"></span>
               </a>

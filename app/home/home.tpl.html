@@ -9,7 +9,7 @@
   </ul>
   <div data-ng-if='!home.currentUser'>
     <button class="btn btn-primary" data-ui-sref='signin'>Sign In</button>
-    <button class="btn btn-toggle" data-ui-sref='signup'>Register</button>
+    <button class="btn btn-default" data-ui-sref='signup'>Register</button>
   </div>
 </div>
 
@@ -39,7 +39,7 @@
               <a data-ui-sref="item({categoryId:record.category._id})">
                 {{record.category.name}}
               </a>
-              <a class="btn btn-small pull-right" tooltip="New Try" ng-click="home.addNew(record.category)">
+              <a class="btn btn-sm btn-link pull-right" ng-click="home.addNew(record.category)">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Try
               </a>
             </td>
