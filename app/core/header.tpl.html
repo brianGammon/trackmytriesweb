@@ -28,8 +28,13 @@
         <li ng-click="navCollapsed=!navCollapsed" data-ui-sref-active='active'>
           <a data-ui-sref='about'>About</a>
         </li>
+      </ul>
+      <ul class='nav navbar-nav navbar-right'>
+        <li class="hidden-xs" ng-if="header.currentUser">
+          <p class="navbar-text">Logged in:</p>
+        </li>
         <li data-ui-sref-active='active' class='dropdown' dropdown>
-          <a role="button" class="dropdown-toggle" dropdown-toggle>{{header.currentUser.email || 'User'}}
+          <a role="button" class="dropdown-toggle" dropdown-toggle>{{ header.currentUser.email || 'User'}}
                             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">

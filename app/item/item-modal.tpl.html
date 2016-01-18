@@ -3,12 +3,15 @@
   name="itemModal.form"
   ng-submit="itemModal.save()"
   novalidate>
-  <h4 class="modal-header">Record a Try: {{itemModal.item.category.name}}</h4>
+  <h4 class="modal-header">Record a Try: <strong>{{itemModal.item.category.name}}</strong></h4>
 
   <div class="modal-body">
     <alert data-ng-if="itemModal.errorMessage" type="danger" close="itemModal.errorMessage = null">
       {{itemModal.errorMessage}}
     </alert>
+    <p>
+      {{itemModal.item.category.description}}
+    </p>
 
     <div class="form-group" show-errors>
       <label for="entryDate" class="control-label">Entry Date</label>

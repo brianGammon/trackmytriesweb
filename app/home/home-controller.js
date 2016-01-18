@@ -15,9 +15,10 @@
   function HomeCtrl(currentUser, Item, $modal, ngToast) {
     var vm = this;
 
+    vm.loading = true;
     vm.currentUser = currentUser;
     if (vm.currentUser) {
-      refreshPrs();
+      refreshStats();
     }
 
     // Chart sample data
@@ -41,7 +42,7 @@
         }
       }).result.then(function (item) {
         popMessage(item);
-        refreshPrs(item);
+        refreshStats(item);
       });
     };
 
@@ -49,18 +50,21 @@
       ngToast.info('Saved new ' + item.category.name + ' Try');
     }
 
-    function refreshPrs(newItem) {
-      Item.getRecords().then(function (records) {
-        vm.records = records;
+    function refreshStats(newItem) {
+      Item.getStats().then(function (categories) {
+        vm.categories = categories;
         if (newItem) {
-          angular.forEach(records, function (value) {
-            if (value._id === newItem._id) {
+          angular.forEach(categories, function (category) {
+            if (category.stats && category.stats.best._id === newItem._id) {
               ngToast.success(
                 '<strong>Congratulations!</strong> That\'s a new ' + newItem.category.name + ' PR!'
               );
             }
           });
         }
+      })
+      .finally(function () {
+        vm.loading = false;
       });
     }
   }

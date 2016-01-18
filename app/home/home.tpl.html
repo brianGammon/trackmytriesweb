@@ -1,53 +1,95 @@
-<div class="jumbotron">
-  <h1>TrackMy<span class="text-muted"><em>Tries</em></span></h1>
-  <p>Record each of your "Tries" and track your fitness progress on the PRT (Physical Readiness Test) exercises:</p>
-  <ul>
-    <li>Sit ups</li>
-    <li>Push ups</li>
-    <li>Pull ups</li>
-    <li>1.5 Mile Run</li>
-  </ul>
-  <div data-ng-if='!home.currentUser'>
-    <button class="btn btn-primary" data-ui-sref='signin'>Sign In</button>
-    <button class="btn btn-default" data-ui-sref='signup'>Register</button>
-  </div>
+<div data-ng-if='!home.currentUser'>
+  <!-- Not logged in section-->
+  <div data-ng-include="'/home/home-guest.tpl.html'"/>
 </div>
 
-<!-- Not logged in section-->
-<div data-ng-if="!home.currentUser" data-ng-include="'/home/home-guest.tpl.html'"/>
-<!-- End not logged in section -->
+<div data-ng-if='home.currentUser'>
+  <!-- Logged in section -->
+  <h4>Here's your <strong>TrackMy<em>Tries</em></strong> Dashboard</h4>
+  <hr>
+  <alert data-ng-if='!home.categories && !home.loading'>No tries recorded yet. What are you waiting for?</alert>
 
-<!-- Logged in section -->
-<div data-ng-if='home.currentUser' class="row featurette">
-  <div class="col-md-12">
-    <h4>Hi, {{home.currentUser.email}}!</h4>
+  <div class="row">
+    <div data-ng-repeat='category in home.categories | orderBy:"_id"'>
+      <div class="clearfix visible-md-block" ng-if="$index % 3 === 0"></div>
+      <div class="clearfix visible-sm-block" ng-if="$index % 2 === 0"></div>
 
-    <alert data-ng-if='!home.records'>No tries recorded yet. What are you waiting for?</alert>
+      <div class="col-md-4 col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">{{category.name}}</div>
+          <div class="panel-body">
+            <p>{{category.description}}</p>
+          </div>
 
-    <div data-ng-if='home.records'>
-      <p>Your current best tries:</p>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Result</th>
-            <th>Date</th </tr>
-        </thead>
-        <tbody>
-          <tr data-ng-repeat='record in home.records | orderBy:"category._id"'>
-            <td>
-              <a data-ui-sref="item({categoryId:record.category._id})">
-                {{record.category.name}}
-              </a>
-              <a class="btn btn-sm btn-link pull-right" ng-click="home.addNew(record.category)">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Try
-              </a>
-            </td>
-            <td>{{record.valueNumber || record.valueTime}}</td>
-            <td>{{record.itemDateTime | date:'MM-dd-yyyy'}}</td>
-          </tr>
-        </tbody>
-      </table>
+          <table class="table" ng-if="category.stats">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Result</th>
+                <th>Date</th </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span>Best Try</span></td>
+                <td>{{category.stats.best.valueNumber || category.stats.best.valueTime || 0}}</td>
+                <td>{{category.stats.best.itemDateTime | date:'MM-dd-yyyy'}}</td>
+              </tr>
+              <tr>
+                <td><span>Latest Try</span></td>
+                <td>{{category.stats.latest.valueNumber || category.stats.latest.valueTime || 0}}</td>
+                <td>{{category.stats.latest.itemDateTime | date:'MM-dd-yyyy'}}</td>
+              </tr>
+              <tr>
+                <td><span>First Try</span></td>
+                <td>{{category.stats.first.valueNumber || category.stats.first.valueTime || 0}}</td>
+                <td>{{category.stats.first.itemDateTime | date:'MM-dd-yyyy'}}</td>
+              </tr>
+              <tr>
+                <td colspan="3">
+                  <button data-ui-sref="item({categoryId: category._id})" class="btn btn-sm btn-default btn-block">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> View {{category.name}} History
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3">
+                  <button class="btn btn-sm btn-primary btn-block" ng-click="home.addNew(category)">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New {{category.name}} Try
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table" ng-if="!category.stats">
+            <tr>
+              <td colspan="3">
+                <em>No {{category.name}} tries recorded yet</em>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <button class="btn btn-sm btn-primary btn-block" ng-click="home.addNew(category)">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New {{category.name}} Try
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-6">
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">New Category
+        </div>
+        <div class="panel-body">
+          <button class="btn btn-sm btn-primary btn-block">
+            <span class="glyphicon glyphicon-plus"></span> Add a new category
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -30,6 +30,17 @@
         .then(onSuccess);
     };
 
+    ItemBase.getStatsByCategory = function (categoryId) {
+      return $http.get(API + '/items/stats', {
+        params: {categoryId: categoryId}
+      }).then(onSuccess);
+    };
+
+    ItemBase.getStats = function () {
+      return $http.get(API + '/items/stats')
+        .then(onSuccess);
+    };
+
     ItemBase.getItems = function (categoryId) {
       return $http.get(API + '/items', {
         params: {categoryId: categoryId}
