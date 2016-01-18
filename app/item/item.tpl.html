@@ -4,8 +4,8 @@
   {{item.errorMessage.message || item.errorMessage}}
 </alert>
 
-<alert data-ng-if="item.personalRecord" type="info">
-  <span>Your Personal Record is: <b>{{item.personalRecord.valueNumber || item.personalRecord.valueTime || 0}}</b> achieved on <b>{{item.personalRecord.itemDateTime | date:'MM-dd-yyyy'}}</b> </span>
+<alert data-ng-if="item.stats.best" type="info">
+  <span>Your Personal Record is: <b>{{item.stats.best.valueNumber || item.stats.best.valueTime || 0}}</b> achieved on <b>{{item.stats.best.itemDateTime | date:'MM-dd-yyyy'}}</b> </span>
 </alert>
 <div class="row">
   <div class="col-md-12">
@@ -32,10 +32,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr data-ng-repeat='itm in item.items' ng-class="{info: itm._id == item.personalRecord._id}">
+          <tr data-ng-repeat='itm in item.items' ng-class="{info: itm._id == item.stats.best._id}">
             <td>{{itm.itemDateTime | date:'MM-dd-yyyy'}}</td>
             <td>
-              {{itm.valueNumber || itm.valueTime || 0}} <span data-ng-if='itm._id === item.personalRecord._id' class="badge">PR</span>
+              {{itm.valueNumber || itm.valueTime || 0}} <span data-ng-if='itm._id === item.stats.best._id' class="badge">PR</span>
               <a class="btn btn-small" ng-if="itm.notes">
                 <span tooltip="{{itm.notes}}" class="glyphicon glyphicon-comment" aria-hidden="true"></span>
               </a>

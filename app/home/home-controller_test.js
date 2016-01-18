@@ -7,16 +7,17 @@ describe('HomeCtrl', function () {
       currentUser = {email: 'bgammon@test.com'},
       Item = {},
       $modal = {},
-      records = [{record: 1}, {record: 2}, {record: 3}];
+      categories = [{record: 1}, {record: 2}, {record: 3}];
 
+  beforeEach(module('ngToast'));
   beforeEach(module('home'));
 
   beforeEach(inject(function ($rootScope, $controller, _$q_) {
     $q = _$q_;
 
-    Item.getRecords = function () {
+    Item.getStats = function () {
       var deferred = $q.defer();
-      deferred.resolve(records);
+      deferred.resolve(categories);
 
       return deferred.promise;
     };
@@ -27,6 +28,6 @@ describe('HomeCtrl', function () {
   }));
 
   it('should have a list of personal records', function () {
-    expect(ctrl.records).to.equal(records);
+    expect(ctrl.categories).to.equal(categories);
   });
 });

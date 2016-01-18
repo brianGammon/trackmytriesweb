@@ -7,38 +7,41 @@ describe('ItemCtrl', function () {
       currentUser,
       Category,
       $stateParams,
-      $state,
       $filter,
       $modal = {},
-      scope,
       window,
       $q;
 
+  beforeEach(module('ngToast'));
   beforeEach(module('item'));
 
   beforeEach(inject(function ($rootScope, $controller, _$stateParams_, _$state_, _$filter_, _$q_, _$window_) {
     var item = {
-      _id: '5645fd5662047212024e51c7',
-      user: {
-        _id: '5645fc71890ca80f02ae4dd7',
-        name: 'Brian'
-      },
-      category: {
-        _id: '5645fcd1a01ca905ef611b5c',
-        name: 'Push Ups',
-        description: 'Push ups in 2 minutes',
-        dataType: 'number',
-        goalType: 'most'
-      },
-      itemValue: '20',
-      notes: 'First day at ST',
-      itemDateTime: '2012-08-01T18:11:57.000Z'
-    };
+          _id: '5645fd5662047212024e51c7',
+          user: {
+            _id: '5645fc71890ca80f02ae4dd7',
+            name: 'Brian'
+          },
+          category: {
+            _id: '5645fcd1a01ca905ef611b5c',
+            name: 'Push Ups',
+            description: 'Push ups in 2 minutes',
+            dataType: 'number',
+            goalType: 'most'
+          },
+          itemValue: '20',
+          notes: 'First day at ST',
+          itemDateTime: '2012-08-01T18:11:57.000Z'
+        },
+        statsResults = {
+          stats: {
+            name: 'push ups',
+            best: item
+          }
+        };
 
     $stateParams = _$stateParams_;
-    $state = _$state_;
     $filter = _$filter_;
-    scope = $rootScope.$new();
     window = _$window_;
     Item = {};
     currentUser = {};
@@ -66,19 +69,19 @@ describe('ItemCtrl', function () {
       return deferred.promise;
     };
 
-    Item.getRecord = function () {
+    Item.getStatsByCategory = function () {
       var deferred = $q.defer();
-      deferred.resolve(item);
+      deferred.resolve(statsResults);
       return deferred.promise;
     };
 
     $stateParams.categoryId = '5645fcd1a01ca905ef611b5b';
 
-    ctrl = $controller('ItemCtrl', {Item: Item, currentUser: currentUser, Category: Category, $stateParams: $stateParams, $state: $state, $filter: $filter, $scope: scope, $modal: $modal, $window: window});
+    ctrl = $controller('ItemCtrl', {Item: Item, currentUser: currentUser, Category: Category, $stateParams: $stateParams, $filter: $filter, $modal: $modal, $window: window});
     $rootScope.$apply();
   }));
 
   it('should have the correct personal record', function () {
-    expect(ctrl.personalRecord._id).to.equal('5645fd5662047212024e51c7');
+    expect(ctrl.stats.best._id).to.equal('5645fd5662047212024e51c7');
   });
 });

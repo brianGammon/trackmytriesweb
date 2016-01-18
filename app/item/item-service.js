@@ -19,17 +19,6 @@
       return result.data;
     }
 
-    ItemBase.getRecord = function (categoryId) {
-      return $http.get(API + '/items/records', {
-        params: {categoryId: categoryId}
-      }).then(onSuccess);
-    };
-
-    ItemBase.getRecords = function () {
-      return $http.get(API + '/items/records')
-        .then(onSuccess);
-    };
-
     ItemBase.getStatsByCategory = function (categoryId) {
       return $http.get(API + '/items/stats', {
         params: {categoryId: categoryId}

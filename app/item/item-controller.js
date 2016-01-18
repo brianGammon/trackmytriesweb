@@ -25,7 +25,7 @@
             vm.items = items;
             if (items.length > 0) {
               buildChartData();
-              refreshPr();
+              refreshStats();
             }
           })
           .catch(onError);
@@ -54,7 +54,7 @@
         }
 
         buildChartData();
-        refreshPr();
+        refreshStats();
       });
     };
 
@@ -74,7 +74,7 @@
       }).result.then(function (savedItem) {
         vm.items.push(savedItem);
         buildChartData();
-        refreshPr(savedItem);
+        refreshStats(savedItem);
       });
     };
 
@@ -84,7 +84,7 @@
           .then(function () {
             vm.items.splice(index, 1);
             buildChartData();
-            refreshPr();
+            refreshStats();
           })
           .catch(function (err) {
             onError(err);
@@ -92,14 +92,14 @@
       }
     };
 
-    function refreshPr(newItem) {
-      Item.getRecord(categoryId)
-        .then(function (record) {
-          vm.personalRecord = record;
+    function refreshStats(newItem) {
+      Item.getStatsByCategory(categoryId)
+        .then(function (result) {
+          vm.stats = result.stats;
 
           // If a new item was saved and passed in check if a message should be popped
-          if (newItem && newItem._id === record._id) {
-            ngToast.success('<strong>Congratulations!</strong> That\'s a new ' + record.category.name + ' PR!');
+          if (newItem && newItem._id === result.stats.best._id) {
+            ngToast.success('<strong>Congratulations!</strong> That\'s a new ' + result.name + ' PR!');
           }
         })
         .catch(onError);
@@ -130,10 +130,18 @@
       // Look into moment.js to deal with hh:mm:ss conversion
       vm.chartOptions = {
         tooltipTemplate: function (label) {
+          // Formats the tooltip labels for HH:MM:SS
           if (vm.category.dataType === 'time') {
             return label.label + ' ' + secondsToHms(label.value);
           }
           return label.label + ' ' + label.value;
+        },
+        scaleLabel: function (label) {
+          // Formats the y-axis labels for HH:MM:SS
+          if (vm.category.dataType === 'time') {
+            return secondsToHms(label.value);
+          }
+          return label.value;
         }
       };
     }

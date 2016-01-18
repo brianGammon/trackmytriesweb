@@ -31,10 +31,10 @@ describe('Item', function () {
         ];
 
     $httpBackend
-      .when('GET', apiUrl + '/items/records')
+      .when('GET', apiUrl + '/items/stats')
       .respond(200, fakeApiResponse);
 
-    factory.getRecords().then(function (result) {
+    factory.getStats().then(function (result) {
       records = result;
     });
 
