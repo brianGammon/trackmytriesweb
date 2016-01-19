@@ -1,9 +1,0 @@
-{
-  "_id": "5645fc65890ca80f02ae4dd4",
-  "email": "gammy@test.com",
-  "password": "test123",
-  "roles": [
-    "Admin",
-    "User"
-  ]
-}

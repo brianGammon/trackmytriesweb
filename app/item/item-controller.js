@@ -102,7 +102,7 @@
           vm.stats = result.stats;
 
           // If a new item was saved and passed in check if a message should be popped
-          if (newItem && newItem._id === result.stats.best._id) {
+          if (vm.items.length > 1 && newItem && newItem._id === result.stats.best._id) {
             ngToast.success('<strong>Congratulations!</strong> That\'s a new ' + result.name + ' PR!');
           }
         })

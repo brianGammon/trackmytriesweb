@@ -17,50 +17,42 @@
       <div class="clearfix visible-sm-block" ng-if="$index % 2 === 0"></div>
 
       <div class="col-md-4 col-sm-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">{{category.name}}</div>
+        <div class="panel panel-primary">
+          <div class="panel-heading"><strong>{{category.name}}</strong></div>
           <div class="panel-body">
-            <p>{{category.description}}</p>
+            <p class="text-muted">{{category.description}}</p>
           </div>
 
           <table class="table" ng-if="category.stats">
-            <thead>
-              <tr>
-                <th></th>
-                <th>Result</th>
-                <th>Date</th </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span>Best Try</span></td>
-                <td>{{category.stats.best.valueNumber || category.stats.best.valueTime || 0}}</td>
-                <td>{{category.stats.best.itemDateTime | date:'MM-dd-yyyy'}}</td>
-              </tr>
-              <tr>
-                <td><span>Latest Try</span></td>
-                <td>{{category.stats.latest.valueNumber || category.stats.latest.valueTime || 0}}</td>
-                <td>{{category.stats.latest.itemDateTime | date:'MM-dd-yyyy'}}</td>
-              </tr>
-              <tr>
-                <td><span>First Try</span></td>
-                <td>{{category.stats.first.valueNumber || category.stats.first.valueTime || 0}}</td>
-                <td>{{category.stats.first.itemDateTime | date:'MM-dd-yyyy'}}</td>
-              </tr>
-              <tr>
-                <td colspan="3">
-                  <button data-ui-sref="item({categoryId: category._id})" class="btn btn-sm btn-default btn-block">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> View {{category.name}} History
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3">
-                  <button class="btn btn-sm btn-primary btn-block" ng-click="home.addNew(category)">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New {{category.name}} Try
-                  </button>
-                </td>
-              </tr>
-            </tbody>
+            <tr class="success">
+              <td><strong>Best Try</strong></td>
+              <td><strong>{{category.stats.best.valueNumber || category.stats.best.valueTime || 0}}</strong></td>
+              <td><strong>{{category.stats.best.itemDateTime | date:'MM-dd-yyyy'}}</strong></td>
+            </tr>
+            <tr>
+              <td><span>Latest Try</span></td>
+              <td>{{category.stats.latest.valueNumber || category.stats.latest.valueTime || 0}}</td>
+              <td>{{category.stats.latest.itemDateTime | date:'MM-dd-yyyy'}}</td>
+            </tr>
+            <tr>
+              <td><span>First Try</span></td>
+              <td>{{category.stats.first.valueNumber || category.stats.first.valueTime || 0}}</td>
+              <td>{{category.stats.first.itemDateTime | date:'MM-dd-yyyy'}}</td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <button data-ui-sref="item({categoryId: category._id})" type="button" class="btn btn-default btn-sm btn-block">
+                  <span class="glyphicon glyphicon-search" aria-hidden="true"></span> View {{category.name}} History
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <button type="button" class="btn btn-sm btn-primary btn-block" ng-click="home.addNew(category)">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New {{category.name}} Try
+                </button>
+              </td>
+            </tr>
           </table>
 
           <table class="table" ng-if="!category.stats">
@@ -82,16 +74,9 @@
     </div>
 
     <div class="col-md-4 col-sm-6">
-      <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-heading">New Category
-        </div>
-        <div class="panel-body">
-          <button class="btn btn-sm btn-primary btn-block">
-            <span class="glyphicon glyphicon-plus"></span> Add a new category
-          </button>
-        </div>
-      </div>
+      <button class="btn btn-sm btn-default btn-block">
+        <span class="glyphicon glyphicon-plus"></span> Add a new category
+      </button>
     </div>
   </div>
 </div>
