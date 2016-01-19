@@ -5,7 +5,7 @@
   novalidate>
   <h4 class="modal-header">Record a Try: <strong>{{itemModal.item.category.name}}</strong></h4>
 
-  <div class="modal-body">
+  <div class="modal-body top-buffer">
     <alert data-ng-if="itemModal.errorMessage" type="danger" close="itemModal.errorMessage = null">
       {{itemModal.errorMessage}}
     </alert>
@@ -65,7 +65,7 @@
   </div>
 
   <div class="modal-footer">
-    <button class="btn" type="button" ng-click="itemModal.dismiss()">Cancel</button>
+    <button class="btn btn-default" type="button" ng-click="itemModal.dismiss()">Cancel</button>
     <button class="btn btn-primary" type="submit">Save</button>
   </div>
 </form>
