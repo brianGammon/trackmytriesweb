@@ -7,9 +7,11 @@
   <!-- Logged in section -->
   <h4>Here's your <strong>TrackMy<em>Tries</em></strong> Dashboard</h4>
   <hr>
-  <alert data-ng-if='!home.categories && !home.loading'>No tries recorded yet. What are you waiting for?</alert>
+  <alert data-ng-if='home.loading'>
+    <span class="glyphicon glyphicon-refresh spinning"></span> Hold on, loading your Dashboard...
+  </alert>
 
-  <div class="row">
+  <div data-ng-if="!home.loading" class="row">
     <div data-ng-repeat='category in home.categories | orderBy:"_id"'>
       <div class="clearfix visible-md-block" ng-if="$index % 3 === 0"></div>
       <div class="clearfix visible-sm-block" ng-if="$index % 2 === 0"></div>

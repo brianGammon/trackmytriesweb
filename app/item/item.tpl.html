@@ -4,10 +4,15 @@
   {{item.errorMessage.message || item.errorMessage}}
 </alert>
 
+<alert data-ng-if='item.loading' type="warning">
+  <span class="glyphicon glyphicon-refresh spinning"></span> Hold on, loading your Tries...
+</alert>
+
 <alert data-ng-if="item.stats.best" type="info">
   <span>Your Personal Record is: <b>{{item.stats.best.valueNumber || item.stats.best.valueTime || 0}}</b> achieved on <b>{{item.stats.best.itemDateTime | date:'MM-dd-yyyy'}}</b> </span>
 </alert>
-<div class="row">
+
+<div class="row" data-ng-if="!item.loading">
   <div class="col-md-12">
     <button type="button" class="btn btn-primary pull-right" ng-click="item.addNew()">Log a Try</button>
   </div>

@@ -16,6 +16,7 @@
     var vm = this,
         categoryId = $stateParams.categoryId;
 
+    vm.loading = true;
     Category.getCategory(categoryId)
       .then(function (category) {
         vm.category = category;
@@ -30,7 +31,10 @@
           })
           .catch(onError);
       })
-      .catch(onError);
+      .catch(onError)
+      .finally(function () {
+        vm.loading = false;
+      });
 
     vm.edit = function (item) {
       $modal.open({
