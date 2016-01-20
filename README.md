@@ -12,7 +12,7 @@ Make sure your system has the following foundational software installed:
 
 * NodeJS
 * [TrackMyTries API](https://github.com/brianGammon/trackmytriesapi) access (default is localhost:8080)
-* JDK (optional, for running e2e tests)
+* JDK (for running e2e tests, install prior running ```npm install``` on project)
 
 Next, globally install bower and gulp:
 ```
@@ -35,9 +35,9 @@ npm install
 gulp
 ```
 
-The ```npm install``` command will automatically run bower install and gulp to compile the assets.
+The ```npm install``` command will automatically run bower install and gulp to compile the assets. Investigate any npm errors, common issue is Protractor or Selenium problems due to no JDK on the system.
 
-The default ```gulp``` task will build, lint, run all unit tests. If everything passed the app will launch in the browser with BrowerSync connected.
+The default ```gulp``` task will build, lint, run all unit tests. If everything passed the app will launch in the browser with BrowserSync connected.
 
 ## Running the tests
 
