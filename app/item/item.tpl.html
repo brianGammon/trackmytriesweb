@@ -4,9 +4,10 @@
   {{item.errorMessage.message || item.errorMessage}}
 </alert>
 
-<alert data-ng-if='item.loading' type="warning">
-  <span class="glyphicon glyphicon-refresh spinning"></span> Hold on, loading your Tries...
-</alert>
+<div data-ng-if='item.loading' class="alert alert-info loading">
+  <i class="fa fa-cog fa-spin fa-2x"></i>
+  <span> Hold on, loading your Tries...</span>
+</div>
 
 <alert data-ng-if="item.stats.best" type="success">
   <span>Your Personal Record is: <b>{{item.stats.best.valueNumber || item.stats.best.valueTime || 0}}</b> achieved on <b>{{item.stats.best.itemDateTime | date:'MM-dd-yyyy'}}</b> </span>
@@ -31,7 +32,6 @@
         Record at least 2 tries to see a chart
       </div>
       <div data-ng-if="item.items.length > 1">
-        <h5>Chart</h5>
         <canvas class="chart chart-line" chart-data="item.chartData"
           chart-labels="item.chartLabels" chart-legend="true" chart-series="item.chartSeries"
           chart-options="item.chartOptions">
