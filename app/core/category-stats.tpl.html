@@ -1,0 +1,53 @@
+<div class="panel panel-info">
+  <div class="panel-heading"><strong>{{category.name}}</strong></div>
+  <div class="panel-body">
+    <p class="text-muted">{{category.description}}</p>
+  </div>
+
+  <table class="table" ng-if="category.stats">
+    <tr class="success">
+      <td><strong>Best Try</strong></td>
+      <td><strong>{{category.stats.best.valueNumber || category.stats.best.valueTime || 0}}</strong></td>
+      <td><strong>{{category.stats.best.itemDateTime | date:'MM-dd-yyyy'}}</strong></td>
+    </tr>
+    <tr>
+      <td><span>Latest Try</span></td>
+      <td>{{category.stats.latest.valueNumber || category.stats.latest.valueTime || 0}}</td>
+      <td>{{category.stats.latest.itemDateTime | date:'MM-dd-yyyy'}}</td>
+    </tr>
+    <tr>
+      <td><span>First Try</span></td>
+      <td>{{category.stats.first.valueNumber || category.stats.first.valueTime || 0}}</td>
+      <td>{{category.stats.first.itemDateTime | date:'MM-dd-yyyy'}}</td>
+    </tr>
+    <tr ng-if="viewAll">
+      <td colspan="3">
+        <button data-ui-sref="item({categoryId: category._id})" type="button" class="btn btn-default btn-md btn-block">
+          <span class="glyphicon glyphicon-search" aria-hidden="true"></span> View {{category.name}} History
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <button type="button" class="btn btn-md btn-primary btn-block" ng-click="addFn({category: category})">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New {{category.name}} Try
+        </button>
+      </td>
+    </tr>
+  </table>
+
+  <table class="table" ng-if="!category.stats">
+    <tr class="warning">
+      <td colspan="3">
+        <em>No {{category.name}} tries yet, what are you waiting for?</em>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <button class="btn btn-md btn-primary btn-block" ng-click="addFn({category: category})">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New {{category.name}} Try
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>

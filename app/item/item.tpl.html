@@ -9,24 +9,8 @@
   <span> Hold on, loading your Tries...</span>
 </div>
 
-<alert data-ng-if="item.stats.best" type="success">
-  <span>Your Personal Record is: <b>{{item.stats.best.valueNumber || item.stats.best.valueTime || 0}}</b> achieved on <b>{{item.stats.best.itemDateTime | date:'MM-dd-yyyy'}}</b> </span>
-</alert>
-
-<alert data-ng-if="item.items.length === 0" type="info">
-  <span>
-    You haven't logged any {{item.category.name}} Tries yet...
-  </span>
-</alert>
-
 <div data-ng-if="!item.loading">
-  <div class="row" data-ng-if="!item.loading">
-    <div class="col-md-12">
-      <button type="button" class="btn btn-primary pull-right" ng-click="item.addNew()">New {{item.category.name}} Try</button>
-    </div>
-  </div>
-
-  <div class="row top-buffer" data-ng-if="item.items.length > 0">
+  <div class="row">
     <div class="col-md-7">
       <div data-ng-if="item.items.length < 2" class="alert alert-info chart-message">
         Record at least 2 tries to see a chart
@@ -39,6 +23,12 @@
       </div>
     </div>
     <div class="col-md-5">
+      <category-stats category="item.category" view-all="false" add-fn="item.addNew(item.category)"></category-stats>
+    </div>    
+  </div>
+
+  <div class="row top-buffer" data-ng-if="item.items.length > 0">    
+    <div class="col-md-12">
       <div class="panel panel-info">
         <div class="panel-heading"><strong>Recent Tries</strong></div>
         <table class="table table-striped table-bordered">
@@ -46,17 +36,21 @@
             <tr>
               <th>Date</th>
               <th>Result</th>
+              <th class="hidden-xs">Notes</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr data-ng-repeat='itm in item.items' ng-class="{success: itm._id == item.stats.best._id}">
+            <tr data-ng-repeat='itm in item.items' ng-class="{success: itm._id == item.category.stats.best._id}">
               <td>{{itm.itemDateTime | date:'MM-dd-yyyy'}}</td>
               <td>
-                {{itm.valueNumber || itm.valueTime || 0}} <span data-ng-if='itm._id === item.stats.best._id' class="badge">PR</span>
+                {{itm.valueNumber || itm.valueTime || 0}} <span data-ng-if='itm._id === item.category.stats.best._id' class="badge">PR</span>
                 <a class="btn btn-small" ng-if="itm.notes">
-                  <span tooltip="{{itm.notes}}" class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                  <span tooltip="{{itm.notes}}" class="visible-xs glyphicon glyphicon-comment" aria-hidden="true"></span>
                 </a>
+              </td>
+              <td class="hidden-xs">
+                {{itm.notes}}
               </td>
               <td>
                 <a class="btn btn-small" ng-click="item.edit(itm)">

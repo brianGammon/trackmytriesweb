@@ -62,7 +62,7 @@
       });
     };
 
-    vm.addNew = function () {
+    vm.addNew = function (category) {
       $modal.open({
         templateUrl: 'item/item-modal.tpl.html',
         controller: 'ItemNewCtrl',
@@ -72,7 +72,7 @@
             return currentUser;
           },
           category: function () {
-            return vm.category;
+            return category;
           }
         }
       }).result.then(function (savedItem) {
@@ -99,7 +99,7 @@
     function refreshStats(newItem) {
       Item.getStatsByCategory(categoryId)
         .then(function (result) {
-          vm.stats = result.stats;
+          vm.category = result;
 
           // If a new item was saved and passed in check if a message should be popped
           if (vm.items.length > 1 && newItem && newItem._id === result.stats.best._id) {
