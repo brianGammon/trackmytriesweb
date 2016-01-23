@@ -55,7 +55,12 @@ describe('ItemCtrl', function () {
             name: 'Sit Ups',
             description: 'Sit ups in 2 minutes',
             dataType: 'number',
-            goalType: 'most'
+            goalType: 'most',
+            stats: {
+              best: {
+                _id: '5645fd5662047212024e51c7'
+              }
+            }
           };
 
       deferred.resolve(category);
@@ -82,6 +87,6 @@ describe('ItemCtrl', function () {
   }));
 
   it('should have the correct personal record', function () {
-    expect(ctrl.stats.best._id).to.equal('5645fd5662047212024e51c7');
+    expect(ctrl.category.stats.best._id).to.equal('5645fd5662047212024e51c7');
   });
 });
