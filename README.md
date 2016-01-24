@@ -2,6 +2,8 @@
 
 Web front end for the TrackMyTries API. Track your fitness progress by recording every "Try" of one of the PRT exercises (Sit ups, Push up, Pull ups, or 1.5 mile run).
 
+http://trackmytries-dev.herokuapp.com
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
