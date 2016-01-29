@@ -15,15 +15,6 @@
   function UserCtrl(Auth, $state, $scope) {
     var vm = this;
 
-    function onSuccess() {
-      $state.go('home');
-    }
-
-    function onError(err) {
-      console.log(err);
-      vm.errorMessage = err.data ? err.data : 'An unknown error has occurred';
-    }
-
     vm.signIn = function (credentials) {
       $scope.$broadcast('show-errors-check-validity');
 
@@ -53,5 +44,14 @@
           .catch(onError);
       }
     };
+
+    function onSuccess() {
+      $state.go('home');
+    }
+
+    function onError(err) {
+      console.log(err);
+      vm.errorMessage = err.data ? err.data : 'An unknown error has occurred';
+    }
   }
 }());

@@ -32,6 +32,13 @@
       return $http.post(API + '/user/password', credentials);
     };
 
+    AuthBase.fbSignIn = function (fbAuthResponse) {
+      return $http.post(API + '/user/auth/fb', fbAuthResponse)
+        .then(function (result) {
+          User.setUser(result.data);
+        });
+    };
+
     return AuthBase;
   }
 }());

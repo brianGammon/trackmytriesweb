@@ -8,6 +8,12 @@
    */
   angular
     .module('user', [
-      'ui.router'
-    ]);
+      'ui.router',
+      'ezfb'
+    ])
+    .config(function (ezfbProvider) {
+      ezfbProvider.setInitParams({
+        appId: '427394890789303'
+      });
+    });
 }());
