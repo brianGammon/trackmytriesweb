@@ -15,6 +15,7 @@
   function facebookLogin() {
     return {
       restrict: 'E',
+      replace: true,
       templateUrl: 'user/facebook-login.tpl.html',
       scope: true,
       controllerAs: 'fb',

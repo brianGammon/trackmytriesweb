@@ -1,0 +1,8 @@
+ul.centered {
+  text-align: -webkit-center;
+  text-align: center;
+}
+
+ul.centered > li {
+  margin-left: 20px;
+}

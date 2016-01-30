@@ -1,49 +1,52 @@
-<div class="well">
-  <form
-    class="form-horizontal"
-    role="form"
-    name="user.loginForm"
-    ng-submit="user.signIn(user.credentials)"
-    novalidate>
-    <fieldset>
-      <legend>Sign In</legend>
+<div class="row">
+  <div class="col-sm-5">
+    <div class="well">
+      <form
+        role="form"
+        name="user.loginForm"
+        ng-submit="user.signIn(user.credentials)"
+        novalidate>
+        <fieldset>
+          <legend>Sign In</legend>
 
-      <alert data-ng-if="user.errorMessage" type="danger" close="user.errorMessage = null">
-        {{user.errorMessage}}
-      </alert>
+          <alert data-ng-if="user.errorMessage" type="danger" close="user.errorMessage = null">
+            {{user.errorMessage}}
+          </alert>
 
-      <div class="form-group" show-errors>
-        <label for="email" class="control-label">Email</label>
-        <input
-          class="form-control"
-          ng-model="user.credentials.email"
-          name="email"
-          type="email"
-          value="" required />
-        <div class="help-block" ng-messages="user.loginForm.email.$error" ng-messages-multiple>
-          <div ng-messages-include="user/user-form-messages.html"></div>
-        </div>
-      </div>
+          <div class="form-group" show-errors>
+            <label for="email" class="control-label">Email</label>
+            <input
+              class="form-control"
+              ng-model="user.credentials.email"
+              name="email"
+              type="email"
+              value="" required />
+            <div class="help-block" ng-messages="user.loginForm.email.$error" ng-messages-multiple>
+              <div ng-messages-include="user/user-form-messages.html"></div>
+            </div>
+          </div>
 
-      <div class="form-group" show-errors>
-        <label for="password" class="control-label">Password</label>
-        <input
-          class="form-control password"
-          ng-model="user.credentials.password"
-          name="password"
-          type="password"
-          value="" required/>
-        <div class="help-block" ng-messages="user.loginForm.password.$error" ng-messages-multiple>
-          <div ng-messages-include="user/user-form-messages.html"></div>
-        </div>
-      </div>
+          <div class="form-group" show-errors>
+            <label for="password" class="control-label">Password</label>
+            <input
+              class="form-control password"
+              ng-model="user.credentials.password"
+              name="password"
+              type="password"
+              value="" required/>
+            <div class="help-block" ng-messages="user.loginForm.password.$error" ng-messages-multiple>
+              <div ng-messages-include="user/user-form-messages.html"></div>
+            </div>
+          </div>
 
-      <div class='form-group'>
-        <button class="btn btn-primary" type="submit">Sign In</button>
-      </div>
+          <div class='form-group'>
+            <button class="btn btn-primary" type="submit">Sign In</button>
+          </div>
 
-      <p>Already have an account? <a data-ui-sref="signup">Sign up here</a></p>
-    </fieldset>
-  </form>
+          <p>Don't have an account yet? <a data-ui-sref="signup">Sign up here</a></p>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  <facebook-login/>
 </div>
-<facebook-login/>

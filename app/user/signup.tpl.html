@@ -1,79 +1,82 @@
-<div class="well">
-  <form
-    class="form-horizontal"
-    role="form"
-    name="user.loginForm"
-    data-ng-submit="user.signUp(user.credentials)"
-    novalidate>
-    <fieldset>
-      <legend>Sign Up</legend>
+<div class="row">
+  <div class="col-sm-5">
+    <div class="well">
+      <form
+        role="form"
+        name="user.loginForm"
+        data-ng-submit="user.signUp(user.credentials)"
+        novalidate>
+        <fieldset>
+          <legend>Sign Up</legend>
 
-      <alert data-ng-if="user.errorMessage" type="danger" close="user.errorMessage = null">
-        {{user.errorMessage}}
-      </alert>
+          <alert data-ng-if="user.errorMessage" type="danger" close="user.errorMessage = null">
+            {{user.errorMessage}}
+          </alert>
 
-      <div class="form-group" show-errors>
-        <label for="email" class="control-label">Email</label>
-        <input
-          data-ng-model="user.credentials.email"
-          class="form-control"
-          name="email"
-          type="email"
-          value=""
-          required />
-        <div class="help-block" ng-messages="user.loginForm.email.$error" ng-messages-multiple>
-          <div ng-messages-include="user/user-form-messages.html"></div>
-        </div>
-      </div>
+          <div class="form-group" show-errors>
+            <label for="email" class="control-label">Email</label>
+            <input
+              data-ng-model="user.credentials.email"
+              class="form-control"
+              name="email"
+              type="email"
+              value=""
+              required />
+            <div class="help-block" ng-messages="user.loginForm.email.$error" ng-messages-multiple>
+              <div ng-messages-include="user/user-form-messages.html"></div>
+            </div>
+          </div>
 
-      <div class="form-group" show-errors>
-        <label for="name" class="control-label">Name</label>
-        <input
-          data-ng-model="user.credentials.name"
-          class="form-control"
-          name="name"
-          required />
-        <div class="help-block" ng-messages="user.loginForm.name.$error" ng-messages-multiple>
-          <div ng-messages-include="user/user-form-messages.html"></div>
-        </div>
-      </div>
+          <div class="form-group" show-errors>
+            <label for="name" class="control-label">Name</label>
+            <input
+              data-ng-model="user.credentials.name"
+              class="form-control"
+              name="name"
+              required />
+            <div class="help-block" ng-messages="user.loginForm.name.$error" ng-messages-multiple>
+              <div ng-messages-include="user/user-form-messages.html"></div>
+            </div>
+          </div>
 
-      <div class="form-group" show-errors>
-        <label for="password" class="control-label">Password</label>
-        <input
-          data-ng-model="user.credentials.password"
-          class="form-control password"
-          name="password"
-          type="password"
-          ng-pattern="/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9]).{8,}$/"
-          value=""
-          required />
-        <div class="help-block" ng-messages="user.loginForm.password.$error" ng-messages-multiple>
-          <div ng-messages-include="user/user-form-messages.html"></div>
-        </div>
-      </div>
+          <div class="form-group" show-errors>
+            <label for="password" class="control-label">Password</label>
+            <input
+              data-ng-model="user.credentials.password"
+              class="form-control password"
+              name="password"
+              type="password"
+              ng-pattern="/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9]).{8,}$/"
+              value=""
+              required />
+            <div class="help-block" ng-messages="user.loginForm.password.$error" ng-messages-multiple>
+              <div ng-messages-include="user/user-form-messages.html"></div>
+            </div>
+          </div>
 
-      <div class="form-group" show-errors>
-        <label for="confirmPassword" class="control-label">Confirm Password</label>
-        <input
-          data-ng-model="user.credentials.confirmPassword"
-          class="form-control password"
-          name="confirmPassword"
-          type="password"
-          compare-to="user.credentials.password"
-          value=""
-          required />
-        <div class="help-block" ng-messages="user.loginForm.confirmPassword.$error" ng-messages-multiple>
-          <div ng-messages-include="user/user-form-messages.html"></div>
-        </div>
-      </div>
+          <div class="form-group" show-errors>
+            <label for="confirmPassword" class="control-label">Confirm Password</label>
+            <input
+              data-ng-model="user.credentials.confirmPassword"
+              class="form-control password"
+              name="confirmPassword"
+              type="password"
+              compare-to="user.credentials.password"
+              value=""
+              required />
+            <div class="help-block" ng-messages="user.loginForm.confirmPassword.$error" ng-messages-multiple>
+              <div ng-messages-include="user/user-form-messages.html"></div>
+            </div>
+          </div>
 
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">Create</button>
-      </div>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit">Create</button>
+          </div>
 
-      <p>Already have an account? <a data-ui-sref="signin">Sign in here</a></p>
-    </fieldset>
-  </form>
+          <p>Already have an account? <a data-ui-sref="signin">Sign in here</a></p>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  <facebook-login/>
 </div>
-<facebook-login/>
