@@ -6,3 +6,11 @@ ul.centered {
 ul.centered > li {
   margin-left: 20px;
 }
+
+.bordered {
+  padding: 0 10px 0 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 10px;
+  border-color: #468847;
+}
