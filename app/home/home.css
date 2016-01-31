@@ -14,3 +14,10 @@ ul.centered > li {
   border-radius: 10px;
   border-color: #468847;
 }
+
+.jumbotron {
+  background-image: url('/images/chart-bkgrd.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center right;
+}
