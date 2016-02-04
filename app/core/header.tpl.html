@@ -10,13 +10,13 @@
       <a class="navbar-brand" href="#/"><i class="fa fa-line-chart"></i> TrackMy<em>Tries</em></a>
     </div>
 
-    <div class="collapse navbar-collapse" collapse="navCollapsed">
+    <div class="collapse navbar-collapse" uib-collapse="navCollapsed">
       <ul class="nav navbar-nav">
         <li ng-click="navCollapsed=!navCollapsed" data-ui-sref-active="active">
           <a data-ui-sref="home">Home</a>
         </li>
-        <li data-ng-if="header.currentUser" data-ui-sref-active="active" class="dropdown" dropdown>
-          <a role="button" class="dropdown-toggle" dropdown-toggle>Categories
+        <li data-ng-if="header.currentUser" data-ui-sref-active="active" uib-dropdown>
+          <a role="button" class="dropdown-toggle" uib-dropdown-toggle>Categories
                             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
@@ -33,14 +33,14 @@
         <li class="hidden-xs" ng-if="header.currentUser">
           <p class="navbar-text">Logged in:</p>
         </li>
-        <li data-ui-sref-active="active" class="dropdown" dropdown>
-          <a role="button" class="dropdown-toggle" dropdown-toggle><strong>{{ header.currentUser.name || "User"}}</strong>
+        <li data-ui-sref-active="active" uib-dropdown>
+          <a role="button" class="dropdown-toggle" uib-dropdown-toggle><strong>{{ header.currentUser.name || "User"}}</strong>
                             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
             <li>
+              <a ng-if="!header.currentUser" data-ui-sref="signin">Log In</a>
               <a ng-if="!header.currentUser" data-ui-sref="signup">Sign Up</a>
-              <a ng-if="!header.currentUser" data-ui-sref="signin">Sign In</a>
               <a ng-if="header.currentUser && header.currentUser.loginType === 'local'" data-ui-sref="password">Change Password</a>
               <a href="#" ng-if="header.currentUser" data-ng-click="header.signout()">Sign Out</a>
             </li>

@@ -7,17 +7,32 @@
   <table class="table" ng-if="category.stats">
     <tr class="success">
       <td><strong>Best Try</strong></td>
-      <td><strong>{{category.stats.best.valueNumber || category.stats.best.valueTime || 0}}</strong></td>
+      <td data-ng-if="category.valueType === 'number'">
+        <strong>{{category.stats.best.valueNumber || 0}}</strong>
+      </td>
+      <td data-ng-if="category.valueType === 'duration'">
+        <strong>{{category.stats.best.valueNumber * 1000 | date:'mm:ss' : 'UTC' }}</strong>
+      </td>
       <td><strong>{{category.stats.best.itemDateTime | date:'MM-dd-yyyy'}}</strong></td>
     </tr>
     <tr>
       <td><span>Latest Try</span></td>
-      <td>{{category.stats.latest.valueNumber || category.stats.latest.valueTime || 0}}</td>
+      <td data-ng-if="category.valueType === 'number'">
+        {{category.stats.latest.valueNumber || 0}}
+      </td>
+      <td data-ng-if="category.valueType === 'duration'">
+        {{category.stats.latest.valueNumber * 1000 | date:'mm:ss' : 'UTC' }}
+      </td>
       <td>{{category.stats.latest.itemDateTime | date:'MM-dd-yyyy'}}</td>
     </tr>
     <tr>
       <td><span>First Try</span></td>
-      <td>{{category.stats.first.valueNumber || category.stats.first.valueTime || 0}}</td>
+      <td data-ng-if="category.valueType === 'number'">
+        {{category.stats.first.valueNumber || 0}}
+      </td>
+      <td data-ng-if="category.valueType === 'duration'">
+        {{category.stats.first.valueNumber * 1000 | date:'mm:ss' : 'UTC' }}
+      </td>
       <td>{{category.stats.first.itemDateTime | date:'MM-dd-yyyy'}}</td>
     </tr>
     <tr ng-if="viewAll">

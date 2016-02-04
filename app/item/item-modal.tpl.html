@@ -6,9 +6,9 @@
   <h4 class="modal-header">Record a Try: <strong>{{itemModal.item.category.name}}</strong></h4>
 
   <div class="modal-body top-buffer">
-    <alert data-ng-if="itemModal.errorMessage" type="danger" close="itemModal.errorMessage = null">
+    <uib-alert data-ng-if="itemModal.errorMessage" type="danger" close="itemModal.errorMessage = null">
       {{itemModal.errorMessage}}
-    </alert>
+    </uib-alert>
     <p>
       {{itemModal.item.category.description}}
     </p>
@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <div data-ng-if='itemModal.item.category.dataType === "number"'>
+    <div data-ng-if='itemModal.item.category.valueType === "number"'>
       <div class="form-group" show-errors>
         <label for="countScore" class="control-label">Number Completed</label>
         <input class="form-control"
@@ -40,18 +40,14 @@
       </div>
     </div>
 
-    <div data-ng-if='itemModal.item.category.dataType === "time"'>
-      <div class="form-group" show-errors>
-        <label for="timeScore" class="control-label">Time</label>
-        <input class="form-control"
-          data-ng-model="itemModal.item.valueTime"
-          name="timeScore"
-          type="text"
-          maxlength="5"
-          ng-pattern="/^[0-5][0-9]:[0-5][0-9]$/"
-          value="" required />
-        <div class="help-block" ng-messages="itemModal.form.timeScore.$error" ng-messages-multiple>
-          <div ng-messages-include="item/item-form-messages.html"></div>
+    <div data-ng-if='itemModal.item.category.valueType === "duration"'>
+      <div class="form-group">
+        <label for="timeScore" class="control-label">Time in HH:MM:SS</label>
+        <div>
+          <uib-timepicker ng-model="itemModal.timePickerDate" ng-change="itemModal.durationChanged()" show-meridian="false" show-seconds="true" hour-step="1" minute-step="1"></uib-timepicker>
+          <p class="text-danger durationError" data-ng-if="itemModal.durationError">
+            {{itemModal.durationError}}
+          </p>
         </div>
       </div>
     </div>

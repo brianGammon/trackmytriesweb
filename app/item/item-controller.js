@@ -12,7 +12,7 @@
     .module('item')
     .controller('ItemCtrl', ItemCtrl);
 
-  function ItemCtrl(Item, currentUser, Category, $stateParams, $filter, $modal, $window, ngToast) {
+  function ItemCtrl(Item, currentUser, Category, $stateParams, $filter, $uibModal, $window, ngToast) {
     var vm = this,
         categoryId = $stateParams.categoryId;
 
@@ -37,11 +37,17 @@
       });
 
     vm.edit = function (item) {
-      $modal.open({
+      $uibModal.open({
         templateUrl: 'item/item-modal.tpl.html',
-        controller: 'ItemEditCtrl',
+        controller: 'ItemModalCtrl',
         controllerAs: 'itemModal',
         resolve: {
+          currentUser: function () {
+            return currentUser;
+          },
+          category: function () {
+            return item.category;
+          },
           item: function () {
             return angular.copy(item);
           }
@@ -63,9 +69,9 @@
     };
 
     vm.addNew = function (category) {
-      $modal.open({
+      $uibModal.open({
         templateUrl: 'item/item-modal.tpl.html',
-        controller: 'ItemNewCtrl',
+        controller: 'ItemModalCtrl',
         controllerAs: 'itemModal',
         resolve: {
           currentUser: function () {
@@ -73,6 +79,9 @@
           },
           category: function () {
             return category;
+          },
+          item: function () {
+            return null;
           }
         }
       }).result.then(function (savedItem) {
@@ -120,14 +129,9 @@
         value.itemDateTime = new Date(value.itemDateTime);
 
         chartLabels.push($filter('date')(value.itemDateTime, 'shortDate'));
-
-        if (vm.category.dataType === 'number') {
-          chartData.push(value.valueNumber);
-        } else {
-          chartData.push(parseInt(value.valueTime.slice(0, 2), 10) * 60 +
-            parseInt(value.valueTime.slice(-2), 10));
-        }
+        chartData.push(value.valueNumber);
       });
+
       vm.chartLabels = chartLabels.reverse();
       vm.chartData = [chartData.reverse()];
       vm.chartSeries = [vm.category.description];
@@ -135,14 +139,14 @@
       vm.chartOptions = {
         tooltipTemplate: function (label) {
           // Formats the tooltip labels for HH:MM:SS
-          if (vm.category.dataType === 'time') {
+          if (vm.category.valueType === 'duration') {
             return label.label + ' ' + secondsToHms(label.value);
           }
           return label.label + ' ' + label.value;
         },
         scaleLabel: function (label) {
           // Formats the y-axis labels for HH:MM:SS
-          if (vm.category.dataType === 'time') {
+          if (vm.category.valueType === 'duration') {
             return secondsToHms(label.value);
           }
           return label.value;

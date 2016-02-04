@@ -8,7 +8,7 @@ describe('ItemCtrl', function () {
       Category,
       $stateParams,
       $filter,
-      $modal = {},
+      $uibModal = {},
       window,
       $q;
 
@@ -26,8 +26,8 @@ describe('ItemCtrl', function () {
             _id: '5645fcd1a01ca905ef611b5c',
             name: 'Push Ups',
             description: 'Push ups in 2 minutes',
-            dataType: 'number',
-            goalType: 'most'
+            valueType: 'number',
+            goalType: 'more'
           },
           itemValue: '20',
           notes: 'First day at ST',
@@ -54,8 +54,8 @@ describe('ItemCtrl', function () {
             _id: '5645fcd1a01ca905ef611b5b',
             name: 'Sit Ups',
             description: 'Sit ups in 2 minutes',
-            dataType: 'number',
-            goalType: 'most',
+            valueType: 'number',
+            goalType: 'more',
             stats: {
               best: {
                 _id: '5645fd5662047212024e51c7'
@@ -82,7 +82,7 @@ describe('ItemCtrl', function () {
 
     $stateParams.categoryId = '5645fcd1a01ca905ef611b5b';
 
-    ctrl = $controller('ItemCtrl', {Item: Item, currentUser: currentUser, Category: Category, $stateParams: $stateParams, $filter: $filter, $modal: $modal, $window: window});
+    ctrl = $controller('ItemCtrl', {Item: Item, currentUser: currentUser, Category: Category, $stateParams: $stateParams, $filter: $filter, $uibModal: $uibModal, $window: window});
     $rootScope.$apply();
   }));
 

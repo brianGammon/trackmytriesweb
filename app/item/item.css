@@ -14,3 +14,14 @@
 .top-buffer {
   margin-top: 10px;
 }
+
+.uib-timepicker {
+  display: inline-block;
+  vertical-align: middle;
+  vertical-align: -webkit-baseline-middle;
+}
+
+.durationError {
+  display: inline-block;
+  padding-left: 10px;
+}

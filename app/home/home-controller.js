@@ -12,7 +12,7 @@
     .module('home')
     .controller('HomeCtrl', HomeCtrl);
 
-  function HomeCtrl(currentUser, Item, $modal, ngToast) {
+  function HomeCtrl(currentUser, Item, $uibModal, ngToast) {
     var vm = this;
 
     vm.loading = true;
@@ -28,9 +28,9 @@
     vm.chartOptions = {};
 
     vm.addNew = function (category) {
-      $modal.open({
+      $uibModal.open({
         templateUrl: 'item/item-modal.tpl.html',
-        controller: 'ItemNewCtrl',
+        controller: 'ItemModalCtrl',
         controllerAs: 'itemModal',
         resolve: {
           currentUser: function () {
@@ -38,6 +38,9 @@
           },
           category: function () {
             return category;
+          },
+          item: function () {
+            return null;
           }
         }
       }).result.then(function (item) {

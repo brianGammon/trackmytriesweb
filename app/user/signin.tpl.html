@@ -9,9 +9,9 @@
         <fieldset>
           <legend>Sign In</legend>
 
-          <alert data-ng-if="user.errorMessage" type="danger" close="user.errorMessage = null">
+          <uib-alert data-ng-if="user.errorMessage" type="danger" close="user.errorMessage = null">
             {{user.errorMessage}}
-          </alert>
+          </uib-alert>
 
           <div class="form-group" show-errors>
             <label for="email" class="control-label">Email</label>

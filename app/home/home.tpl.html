@@ -8,10 +8,10 @@
   <h4>Here's your <strong>TrackMy<em>Tries</em></strong> Dashboard</h4>
   <hr>
 
-  <div data-ng-if="home.loading" class="alert alert-info loading">
+  <uib-alert data-ng-if="home.loading" type="info" class="loading">
     <i class="fa fa-cog fa-spin fa-2x"></i>
     <span> Hold on, loading your Dashboard...</span>
-  </div>
+  </uib-alert>
 
   <div data-ng-if="!home.loading" class="row">
     <div data-ng-repeat='category in home.categories | orderBy:"_id"'>

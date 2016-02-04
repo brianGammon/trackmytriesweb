@@ -6,7 +6,7 @@ describe('HomeCtrl', function () {
       $q,
       currentUser = {email: 'bgammon@test.com'},
       Item = {},
-      $modal = {},
+      $uibModal = {},
       categories = [{record: 1}, {record: 2}, {record: 3}];
 
   beforeEach(module('ngToast'));
@@ -22,7 +22,7 @@ describe('HomeCtrl', function () {
       return deferred.promise;
     };
 
-    ctrl = $controller('HomeCtrl', {currentUser: currentUser, Item: Item, $modal: $modal});
+    ctrl = $controller('HomeCtrl', {currentUser: currentUser, Item: Item, $uibModal: $uibModal});
 
     $rootScope.$apply();
   }));
