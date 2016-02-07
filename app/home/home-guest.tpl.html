@@ -1,32 +1,106 @@
-<div class="jumbotron">
-  <h1><i class="fa fa-line-chart"></i>TrackMy<span class="text-muted"><em>Tries</em></span></h1>
-  <p>Record each of your "Tries" and track your fitness progress on the PRT (Physical Readiness Test) exercises:</p>
-  <ul class="list-inline centered">
-    <li><strong><p class="text-success bordered">Sit ups</p></strong></li>
-    <li><strong><p class="text-success bordered">Push ups</p></strong></li>
-    <li><strong><p class="text-success bordered">Pull ups</p></strong></li>
-    <li><strong><p class="text-success bordered">1.5 Mile Run</p></strong></li>
-  </ul>
-  <p>
-    Track <em>anything</em> you want by creating your own categories
-  </p>
-  <ul class="list-inline centered">
-    <li><strong><p class="text-success bordered">Custom Categories</p></strong></li>
-  </ul>
-  <div>
-    <button class="btn btn-primary" data-ui-sref='signin'>Log In</button>
-    <button class="btn btn-success" data-ui-sref='signup'>Sign Up</button>
+<section class="row title-row">
+  <div class="fill-screen" style="background-image: url(images/pushups.jpg)" resize>
+    <div class="jumbotron title-image">
+      <h1><i class="fa fa-line-chart"></i> TrackMyTries</h1>
+      <p>Record each of your "Tries" on the PRT (Physical Readiness Test) to track your fitness</p>
+      <p>
+        Track <em>anything</em> you want by creating your own categories, too!
+      </p>
+      <div>
+        <button class="btn btn-primary" data-ui-sref='signin'>Log In</button>
+        <button class="btn btn-success" data-ui-sref='signup'>Sign Up</button>
+      </div>
+    </div>
+    <div class="down-button">
+        <a class="btn" scroll-to="categories" offset="65">
+            <i class="fa fa-arrow-circle-down fa-4x"></i>
+        </a>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="row featurette">
+<section id="categories" class="row text-banner">
+  <h1><i class="fa fa-line-chart"></i></h1>
+  <div class="col-sm-5">
+    <div class="row">
+      <h2>
+        PRT Exercises
+      </h2>
+    </div>
+    <div class="row">
+      <p>
+        4 built-in categories for tracking your PRT exercises:
+      </p>
+    </div>
+    <div class="row">
+      <div class="col-sm-3 col-xs-6">
+        <p class="text-muted">
+          <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Push Ups
+        </p>
+      </div>
+      <div class="col-sm-3 col-xs-6">
+        <p class="text-muted">
+          <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Sit Ups
+        </p>
+      </div>
+      <div class="col-sm-3 col-xs-6">
+        <p class="text-muted">
+          <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Pull Ups
+        </p>
+      </div>
+      <div class="col-sm-3 col-xs-6">
+        <p class="text-muted">
+          <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 1.5 Mile Run
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-5 col-md-offset-1">
+    <div class="row">
+      <h2>
+        Custom Categories
+      </h2>
+    </div>
+    <div class="row">
+      <p>
+        Track any activity with custom categories. If it is measured with a number or duration,
+        you can track it!
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="row">
+    <div class="fill-screen fixed-attachment" style="background-image: url(images/pullups-crop.jpg)" resize>
+    </div>
+</section>
+
+<section id="chart" class="row text-banner">
+  <div class="col-md-6 col-md-push-6">
+    <h2>Visualize Your Progress</h2>
+    <p>Record all of your tries to chart your results</p>
+  </div>
+  <div class="col-md-6 col-md-pull-6">
+    <canvas class="chart chart-line" chart-data="home.chartData"
+      chart-labels="home.chartLabels" chart-legend="true" chart-series="home.chartSeries"
+      chart-options="home.chartOptions">
+    </canvas>
+  </div>
+</section>
+
+<section class="row">
+  <div class="fill-screen fixed-attachment" style="background-image: url(images/situps2-crop.jpg)" resize>
+  </div>
+</section>
+
+<section id="stats" class="row text-banner">
   <div class="col-md-7">
     <h2 class="featurette-heading">Track Your Stats</h2>
     <p class="lead">Always know where you stand with quick access to your stats in each category on the Dashboard</p>
   </div>
 
   <div class="col-md-5">
-    <div class="panel panel-info">
+    <div class="panel panel-primary">
       <div class="panel-heading"><strong>Push ups</strong></div>
       <div class="panel-body">
         <p class="text-muted">Number of Push ups completed in 2 minutes</p>
@@ -65,28 +139,48 @@
       </table>
     </div>
   </div>
-</div>
-<hr class="featurette-divider">
-<div class="row featurette">
-  <div class="col-md-5 col-md-push-7">
-    <h2 class="featurette-heading">Visualize Your Progress</h2>
-    <p class="lead">Record all of your tries to chart your results</p>
-  </div>
-  <div class="col-md-7 col-md-pull-5">
-    <h4>Your Latest 12 Tries:</h4>
-    <canvas class="chart chart-line" chart-data="home.chartData"
-      chart-labels="home.chartLabels" chart-legend="true" chart-series="home.chartSeries"
-      chart-options="home.chartOptions">
-    </canvas>
-  </div>
-</div>
-<hr class="featurette-divider">
-<div class="row featurette">
-  <div class="col-md-7">
-    <h2 class="featurette-heading">Mobile Friendly</h2>
-    <p class="lead">Track your tries from anywhere, using your smartphone's browser</p>
-  </div>
-  <div class="col-md-5">
-    <img src="images/phone-sm.png" alt="Generic placeholder image">
-  </div>
-</div>
+</section>
+
+<section class="row">
+    <div class="fill-screen fixed-attachment" style="background-image: url(images/running2.jpg)" resize>
+    </div>
+</section>
+
+<section id="about" class="row text-banner wow fadeInDown">
+    <h1>About</h1>
+    <div class="row">
+      <p>
+        I am a software guy from Richmond VA, and a member of <a href="http://sealteampt.com" target="_blank">SEAL Team Physical Training</a>.
+        TrackMyTries is an application for tracking progress on the PRT and other fitness activities.
+      </p>
+      <p>
+        The project consists of a RESTful API backend written in JavaScript using NodeJS, Restify and MongoDB.
+        The front end is a single page web app using AngularJS and Bootstrap. Both projects are open-source and <a href="https://github.com/brianGammon" target="_blank">available on Github</a>.
+      </p>
+    </div>
+    <div class="row about-tech">
+      <div class="col-md-4">
+        <a href="https://angularjs.org" target="_blank"><img src="/images/angular-logo.jpg" alt="AngularJS"></a>
+        <h4>AngularJS</h4>
+      </div>
+      <div class="col-md-4">
+        <a href="https://nodejs.org" target="_blank"><img src="/images/nodejs.png" alt="Node.js"></a>
+        <h4>Node.js</h4>
+      </div>
+      <div class="col-md-4">
+        <a href="http://mongodb.org" target="_blank"><img src="/images/mongo-leaf.png" alt="MongoDB"></a>
+        <h4>MongoDB</h4>
+      </div>
+    </div>
+</section>
+
+<section class="row">
+    <div class="fill-screen fixed-attachment" style="background-image: url(images/pushups2.jpg)" resize>
+    </div>
+</section>
+
+<section id="sign-up-banner" class="row text-banner">
+  <h2 class="featurette-heading">Sign Up Now</h2>
+  <p>Sign up now and get started tracking your "tries" today!</p>
+  <button class="btn btn-success" data-ui-sref='signup'>Sign Up</button>
+</section>

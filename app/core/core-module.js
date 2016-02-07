@@ -8,7 +8,8 @@
    */
   angular
     .module('core', [
-      'ui.router'
+      'ui.router',
+      'smoothScroll'
     ])
     .constant('API', 'http://localhost:8080');
 }());

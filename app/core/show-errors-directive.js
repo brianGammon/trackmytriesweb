@@ -3,7 +3,7 @@
 
   /**
    * @ngdoc object
-   * @name user.directive:showErrors
+   * @name core.directive:showErrors
    *
    * @description
    *

@@ -1,3 +1,43 @@
+/* Sticky footer http://ryanfait.com/resources/footer-stick-to-bottom-of-page/ */
+* {
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -4em;
+}
+
+.footer, .push {
+  height: 4em;
+}
+/* End sticky footer */
+
+body {
+    position: relative;
+}
+
+.footer {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ddd;
+    padding: 20px;
+    text-align: center;
+}
+
+.main-content {
+  margin-top: 60px;
+}
+
+.navbar-inverse {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 .help-block {
   display: none;
 }

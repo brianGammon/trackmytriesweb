@@ -1,4 +1,4 @@
-<nav data-ng-controller="HeaderCtrl as header" class="navbar navbar-inverse" role="navigation">
+<nav data-ng-controller="HeaderCtrl as header" class="navbar navbar-inverse navbar-fixed-top"  role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
       <button class="navbar-toggle collapsed" type="button" data-ng-init="navCollapsed = true" data-ng-click="navCollapsed = !navCollapsed">
@@ -25,9 +25,9 @@
             </li>
           </ul>
         </li>
-        <li ng-click="navCollapsed=!navCollapsed" data-ui-sref-active="active">
+        <!-- <li ng-click="navCollapsed=!navCollapsed" data-ui-sref-active="active">
           <a data-ui-sref="about">About</a>
-        </li>
+        </li> -->
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="hidden-xs" ng-if="header.currentUser">

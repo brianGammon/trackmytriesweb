@@ -34,12 +34,15 @@
   </head>
   <body>
     <header data-ng-include="'/core/header.tpl.html'"></header>
-    <toast></toast>
-    <div class='container' data-ui-view></div>
 
-    <hr>
+    <div class="wrapper">
+      <toast></toast>
+      <div class="container-fluid" data-ui-view></div>
+      <div class="push"></div>
+    </div>
+
     <footer class="footer">
-      <div class="container">
+      <div class="container-fluid">
         <p class="text-muted">&copy; TrackMyTries 2016</p>
       </div>
     </footer>

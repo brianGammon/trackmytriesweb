@@ -1,3 +1,58 @@
+.fill-screen {
+    background-size: cover;
+    background-position: center;
+}
+
+.title-row {
+    position: relative;
+    min-height: 300px;
+}
+.title-row .jumbotron {
+    position: absolute;
+    padding: 20px;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+}
+
+.down-button {
+    position: absolute;
+    bottom: 40px;
+    width: 100%;
+    text-align: center;
+    color: white;
+}
+
+.down-button i {
+    color: white;
+}
+
+.fixed-attachment {
+    background-attachment: fixed;
+}
+@media (max-width: 1024px){
+    .fixed-attachment {
+        background-attachment: scroll;
+    }
+}
+
+#about, #chart, .text-banner {
+    margin: 15px 15px;
+    text-align: center;
+}
+
+.text-banner p {
+    font-size: 18px;
+}
+
+.about-tech img {
+  height: 75px;
+}
+
 ul.centered {
   text-align: -webkit-center;
   text-align: center;
@@ -7,17 +62,9 @@ ul.centered > li {
   margin-left: 20px;
 }
 
-.bordered {
-  padding: 0 10px 0 10px;
+.prt-text {
   border-style: solid;
   border-width: 1px;
   border-radius: 10px;
   border-color: #468847;
-}
-
-.jumbotron {
-  background-image: url('/images/chart-bkgrd.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center right;
 }
