@@ -29,7 +29,8 @@
     // if this is a duration category, convert the valueNumber to a date
     if (vm.item.category.valueType === 'duration') {
       date = new Date(vm.item.valueNumber * 1000);
-      vm.timePickerDate = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+      vm.timePickerDate = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
+        date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
     }
 
     vm.durationChanged = function () {

@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = function (gulp, $, config) {
+  var formatter = require('eslint-path-formatter');
   // lint source code
   gulp.task('lint', function () {
     var jsFilter = $.filter('**/*.js', {restore: true});
@@ -22,7 +23,7 @@ module.exports = function (gulp, $, config) {
       }}))
       .pipe(jsFilter)
       .pipe($.eslint())
-      .pipe($.eslint.formatEach('./node_modules/eslint-path-formatter'))
+      .pipe($.eslint.formatEach(formatter))
       .pipe($.eslint.failOnError())
       .pipe($.jshint())
       .pipe($.jshint.reporter('jshint-stylish'))

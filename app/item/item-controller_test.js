@@ -3,6 +3,7 @@
 
 describe('ItemCtrl', function () {
   var ctrl,
+      ctrlParams,
       Item,
       currentUser,
       Category,
@@ -82,7 +83,18 @@ describe('ItemCtrl', function () {
 
     $stateParams.categoryId = '5645fcd1a01ca905ef611b5b';
 
-    ctrl = $controller('ItemCtrl', {Item: Item, currentUser: currentUser, Category: Category, $stateParams: $stateParams, $filter: $filter, $uibModal: $uibModal, $window: window});
+    ctrlParams = {
+      Item: Item,
+      currentUser:
+      currentUser,
+      Category: Category,
+      $stateParams: $stateParams,
+      $filter: $filter,
+      $uibModal: $uibModal,
+      $window: window
+    };
+
+    ctrl = $controller('ItemCtrl', ctrlParams);
     $rootScope.$apply();
   }));
 

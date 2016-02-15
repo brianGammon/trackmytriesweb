@@ -18,6 +18,7 @@ describe('Home page', function () {
 
   it('should say HomeCtrl', function () {
     expect(homePage.heading.getText()).to.eventually.equal('TrackMyTries');
-    expect(homePage.introText.getText()).to.eventually.contain('Record each of your "Tries" on the PRT (Physical Readiness Test)');
+    expect(homePage.introText.getText())
+      .to.eventually.contain('Record each of your "Tries" on the PRT (Physical Readiness Test)');
   });
 });

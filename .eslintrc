@@ -4,8 +4,10 @@
     "dustinspecker"
   ],
   "rules": {
-    "angular/ng_controller_name": [2, "/[A-Z].*Ctrl$/"],
+    "angular/controller-name": [2, "/[A-Z].*Ctrl$/"],
+    "angular/log": 0,
     "consistent-this": 0,
+    "semi": [2, "always"],
     "no-underscore-dangle": [2, { "allow": ["_id"] }]
   }
 }

@@ -12,6 +12,7 @@
     .module('item')
     .controller('ItemCtrl', ItemCtrl);
 
+  /* eslint max-params: [2,8] */
   function ItemCtrl(Item, currentUser, Category, $stateParams, $filter, $uibModal, $window, ngToast) {
     var vm = this,
         categoryId = $stateParams.categoryId;
