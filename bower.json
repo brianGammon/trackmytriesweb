@@ -12,7 +12,8 @@
     "ngToast": "ngtoast#~1.5.6",
     "angular-easyfb": "~1.4.1",
     "angular-bootstrap": "~1.1.1",
-    "ngSmoothScroll": "^2.0.0"
+    "ngSmoothScroll": "^2.0.0",
+    "angular-jwt": "^0.0.9"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.*"

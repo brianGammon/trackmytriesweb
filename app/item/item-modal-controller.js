@@ -14,13 +14,18 @@
 
   function ItemModalCtrl($uibModalInstance, item, category, currentUser, Item, $scope) {
     var vm = this,
+        defaultValue = 0,
         date;
 
     if (!item) {
+      // Default new item to the value of the last one, if supplied
+      if (category.stats) {
+        defaultValue = category.stats.latest.valueNumber;
+      }
       vm.item = {};
       vm.item.user = currentUser;
       vm.item.itemDateTime = new Date(Date.now());
-      vm.item.valueNumber = 0;
+      vm.item.valueNumber = defaultValue;
       vm.item.category = category;
     } else {
       vm.item = item;
@@ -71,12 +76,16 @@
     };
 
     function onSuccess(result) {
-      // Date fix for view
-      result.itemDateTime = new Date(result.itemDateTime);
-      // Put the populated category back
-      result.category = vm.item.category;
+      if (result) {
+        // Date fix for view
+        result.itemDateTime = new Date(result.itemDateTime);
+        // Put the populated category back
+        result.category = vm.item.category;
+        $uibModalInstance.close(result);
+      }
 
-      $uibModalInstance.close(result);
+      // If no result, then authorization probably failed
+      $uibModalInstance.dismiss();
     }
 
     function onError(err) {

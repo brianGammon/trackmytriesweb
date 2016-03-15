@@ -13,7 +13,7 @@
     .factory('AuthInterceptor', authInterceptor)
     .config(pushInterceptor);
 
-  function authInterceptor(User, API) {
+  function authInterceptor($q, $injector, User, API) {
     return {
       request: function (config) {
         var token = User.getToken();
@@ -22,6 +22,15 @@
           config.headers['x-access-token'] = token;
         }
         return config;
+      },
+      responseError: function (rejection) {
+        if (rejection.status === 401) {
+          // 401 means bad, expired, or no token
+          User.clear();
+          return $injector.get('$state').go('home', {}, {reload: true});
+        }
+
+        return $q.reject(rejection);
       }
     };
   }

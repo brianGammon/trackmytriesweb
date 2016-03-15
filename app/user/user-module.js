@@ -9,7 +9,8 @@
   angular
     .module('user', [
       'ui.router',
-      'ezfb'
+      'ezfb',
+      'angular-jwt'
     ])
     .config(function (ezfbProvider) {
       ezfbProvider.setInitParams({

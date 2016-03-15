@@ -12,7 +12,7 @@
     .module('user')
     .factory('User', User);
 
-  function User($localStorage, $q) {
+  function User($localStorage, $q, jwtHelper) {
     var UserBase = {},
         callbacks = [];
 
@@ -22,20 +22,26 @@
       });
     }
 
+    function clearUser() {
+      delete $localStorage.user;
+      delete $localStorage.token;
+      notifyCallbacks();
+    }
+
     function getCurrentUser() {
-      // Check for a token
-      // if ($localStorage.token) {
-        // Make sure it is valid and not expired
-      // }
+      if ($localStorage.token) {
+        // Make sure token is valid and not expired
+        if (jwtHelper.isTokenExpired($localStorage.token)) {
+          console.log('token is expired');
+          clearUser();
+        }
+      }
 
-      // If expried, delete user and token from storage and return null
-
-      // If valid, return user form storage
       return $localStorage.user;
     }
 
     UserBase.getUser = function () {
-      return $localStorage.user;
+      return getCurrentUser();
     };
 
     UserBase.getToken = function () {
@@ -53,9 +59,7 @@
     };
 
     UserBase.clear = function () {
-      delete $localStorage.user;
-      delete $localStorage.token;
-      notifyCallbacks();
+      clearUser();
     };
 
     UserBase.signInRequired = function () {
