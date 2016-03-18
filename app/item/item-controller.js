@@ -13,12 +13,12 @@
     .controller('ItemCtrl', ItemCtrl);
 
   /* eslint max-params: [2,8] */
-  function ItemCtrl(Item, currentUser, Category, $stateParams, $filter, $uibModal, $window, ngToast) {
+  function ItemCtrl(Item, currentUser, $stateParams, $filter, $uibModal, $window, ngToast) {
     var vm = this,
         categoryId = $stateParams.categoryId;
 
     vm.loading = true;
-    Category.getCategory(categoryId)
+    Item.getStatsByCategory(categoryId)
       .then(function (category) {
         vm.category = category;
 
@@ -26,8 +26,8 @@
           .then(function (items) {
             vm.items = items;
             if (items.length > 0) {
-              buildChartData();
-              refreshStats();
+              initChart();
+              refreshChartData();
             }
           })
           .catch(onError);
@@ -64,7 +64,7 @@
           }
         }
 
-        buildChartData();
+        refreshChartData();
         refreshStats();
       });
     };
@@ -87,7 +87,7 @@
         }
       }).result.then(function (savedItem) {
         vm.items.push(savedItem);
-        buildChartData();
+        refreshChartData();
         refreshStats(savedItem);
       });
     };
@@ -97,7 +97,7 @@
         Item.deleteItem(vm.items[index]._id)
           .then(function () {
             vm.items.splice(index, 1);
-            buildChartData();
+            refreshChartData();
             refreshStats();
           })
           .catch(function (err) {
@@ -119,38 +119,88 @@
         .catch(onError);
     }
 
-    function buildChartData() {
-      var chartLabels = [],
-          chartData = [];
+    function refreshChartData() {
+      var chartSeries1 = [];
+
       // Sort the items array by date, descending
       vm.items = $filter('orderBy')(vm.items, 'itemDateTime', true);
 
       angular.forEach(vm.items, function (value) {
         // Date fix for view
-        value.itemDateTime = new Date(value.itemDateTime);
+        var d = new Date(value.itemDateTime);
+        value.itemDateTime = d;
 
-        chartLabels.push($filter('date')(value.itemDateTime, 'shortDate'));
-        chartData.push(value.valueNumber);
+        // var yy = $filter('date')(value.itemDateTime, 'yyyy');
+        // chartSeries1.push([Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()), value.valueNumber]);
+        chartSeries1.push([$filter('date')(value.itemDateTime, 'shortDate'), value.valueNumber]);
       });
 
-      vm.chartLabels = chartLabels.reverse();
-      vm.chartData = [chartData.reverse()];
-      vm.chartSeries = [vm.category.description];
-      // Look into moment.js to deal with hh:mm:ss conversion
-      vm.chartOptions = {
-        tooltipTemplate: function (label) {
-          // Formats the tooltip labels for HH:MM:SS
-          if (vm.category.valueType === 'duration') {
-            return label.label + ' ' + secondsToHms(label.value);
+      vm.chartConfig.series[0].data = chartSeries1.reverse();
+    }
+
+    function initChart() {
+      var latestTry = vm.category.stats.latest.valueNumber,
+          seriesName = vm.category.valueType === 'duration' ? 'Time in MM:SS' : 'Number completed',
+          goalLabel = 'Goal: ' + latestTry + 1,
+          minY = null;
+
+      if (vm.category.goalType === 'less') {
+        minY = Math.round(vm.category.stats.best.valueNumber * 0.9, 0);
+      }
+
+      if (vm.category.valueType === 'duration') {
+        goalLabel = 'Goal: ' + secondsToHms(latestTry - 60);
+      }
+
+      vm.chartConfig = {
+        options: {
+          chart: {
+            type: 'areaspline'
+          },
+          tooltip: {
+            pointFormatter: function () {
+              return this.series.name + ': <b>' + secondsToHms(this.y) + '</b>';
+            }
+          },
+          yAxis: {
+            min: minY,
+            title: {text: null},
+            plotLines: [{
+              value: latestTry + 1,
+              color: 'green',
+              width: 2,
+              zIndex: 3,
+              label: {text: goalLabel},
+              dashStyle: 'shortdash'
+            }],
+            labels: {
+              formatter: function () {
+                // Formats the y-axis labels for HH:MM:SS
+                if (vm.category.valueType === 'duration') {
+                  /* eslint angular/controller-as-vm: [0] */
+                  return secondsToHms(this.value);
+                }
+                return this.value;
+              }
+            }
           }
-          return label.label + ' ' + label.value;
         },
-        scaleLabel: function (label) {
-          // Formats the y-axis labels for HH:MM:SS
-          if (vm.category.valueType === 'duration') {
-            return secondsToHms(label.value);
+        series: [{
+          name: seriesName,
+          data: [],
+          marker: {
+            enabled: true
           }
-          return label.value;
+        }],
+        title: {
+          text: vm.category.name
+        },
+        subtitle: {
+          text: vm.category.description
+        },
+        xAxis: {
+          tickmarkPlacement: 'on',
+          type: 'category'
         }
       };
     }

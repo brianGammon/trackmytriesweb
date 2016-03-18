@@ -17,10 +17,11 @@
           Record at least 2 tries to see a chart
         </uib-alert>
         <div data-ng-if="item.items.length > 1">
-          <canvas class="chart chart-line" chart-data="item.chartData"
+          <!-- <canvas class="chart chart-line" chart-data="item.chartData"
             chart-labels="item.chartLabels" chart-legend="true" chart-series="item.chartSeries"
             chart-options="item.chartOptions">
-          </canvas>
+          </canvas> -->
+          <highchart id="chart1" config="item.chartConfig"></highchart>
         </div>
       </div>
       <div class="col-md-5">

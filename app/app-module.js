@@ -10,7 +10,6 @@
     .module('trackmytriesweb', [
       'ui.router',
       'ui.bootstrap',
-      'chart.js',
       'ngStorage',
       'ngMessages',
       'ngToast',

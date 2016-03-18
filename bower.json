@@ -7,13 +7,14 @@
     "angular-ui-router": "~0.2.10",
     "bootstrap": "3.3.4",
     "ngstorage": "~0.3.10",
-    "angular-chart.js": "~0.8.6",
     "angular-messages": "~1.4.8",
     "ngToast": "ngtoast#~1.5.6",
     "angular-easyfb": "~1.4.1",
     "angular-bootstrap": "~1.1.1",
     "ngSmoothScroll": "^2.0.0",
-    "angular-jwt": "^0.0.9"
+    "angular-jwt": "^0.0.9",
+    "highcharts-ng": "~0.0.11",
+    "highcharts": "~4.2.3"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.*"

@@ -6,7 +6,6 @@ describe('ItemCtrl', function () {
       ctrlParams,
       Item,
       currentUser,
-      Category,
       $stateParams,
       $filter,
       $uibModal = {},
@@ -18,38 +17,38 @@ describe('ItemCtrl', function () {
 
   beforeEach(inject(function ($rootScope, $controller, _$stateParams_, _$state_, _$filter_, _$q_, _$window_) {
     var item = {
-          _id: '5645fd5662047212024e51c7',
-          user: {
-            _id: '5645fc71890ca80f02ae4dd7',
-            name: 'Brian'
-          },
-          category: {
-            _id: '5645fcd1a01ca905ef611b5c',
-            name: 'Push Ups',
-            description: 'Push ups in 2 minutes',
-            valueType: 'number',
-            goalType: 'more'
-          },
-          itemValue: '20',
-          notes: 'First day at ST',
-          itemDateTime: '2012-08-01T18:11:57.000Z'
-        },
-        statsResults = {
-          stats: {
-            name: 'push ups',
-            best: item
-          }
-        };
+      _id: '5645fd5662047212024e51c7',
+      user: {
+        _id: '5645fc71890ca80f02ae4dd7',
+        name: 'Brian'
+      },
+      category: {
+        _id: '5645fcd1a01ca905ef611b5c',
+        name: 'Push Ups',
+        description: 'Push ups in 2 minutes',
+        valueType: 'number',
+        goalType: 'more'
+      },
+      itemValue: '20',
+      notes: 'First day at ST',
+      itemDateTime: '2012-08-01T18:11:57.000Z'
+    };
 
     $stateParams = _$stateParams_;
     $filter = _$filter_;
     window = _$window_;
     Item = {};
     currentUser = {};
-    Category = {};
     $q = _$q_;
 
-    Category.getCategory = function () {
+    Item.getItems = function () {
+      var deferred = $q.defer();
+      deferred.resolve([item]);
+
+      return deferred.promise;
+    };
+
+    Item.getStatsByCategory = function () {
       var deferred = $q.defer(),
           category = {
             _id: '5645fcd1a01ca905ef611b5b',
@@ -60,24 +59,13 @@ describe('ItemCtrl', function () {
             stats: {
               best: {
                 _id: '5645fd5662047212024e51c7'
+              },
+              latest: {
+                valueNumber: 66
               }
             }
           };
-
       deferred.resolve(category);
-      return deferred.promise;
-    };
-
-    Item.getItems = function () {
-      var deferred = $q.defer();
-      deferred.resolve([item]);
-
-      return deferred.promise;
-    };
-
-    Item.getStatsByCategory = function () {
-      var deferred = $q.defer();
-      deferred.resolve(statsResults);
       return deferred.promise;
     };
 
@@ -87,7 +75,6 @@ describe('ItemCtrl', function () {
       Item: Item,
       currentUser:
       currentUser,
-      Category: Category,
       $stateParams: $stateParams,
       $filter: $filter,
       $uibModal: $uibModal,
