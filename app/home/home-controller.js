@@ -36,6 +36,7 @@
           type: 'areaspline'
         },
         yAxis: {
+          min: 20,
           title: {text: null},
           plotLines: [{
             value: 72,

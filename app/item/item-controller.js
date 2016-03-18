@@ -141,11 +141,11 @@
     function initChart() {
       var latestTry = vm.category.stats.latest.valueNumber,
           seriesName = vm.category.valueType === 'duration' ? 'Time in MM:SS' : 'Number completed',
-          goalLabel = 'Goal: ' + latestTry + 1,
+          goalLabel = 'Goal: ' + (latestTry + 1),
           minY = null;
 
       if (vm.category.goalType === 'less') {
-        minY = Math.round(vm.category.stats.best.valueNumber * 0.9, 0);
+        minY = Math.round(vm.category.stats.best.valueNumber * 0.95, 0);
       }
 
       if (vm.category.valueType === 'duration') {
@@ -159,7 +159,11 @@
           },
           tooltip: {
             pointFormatter: function () {
-              return this.series.name + ': <b>' + secondsToHms(this.y) + '</b>';
+              if (vm.category.valueType === 'duration') {
+                return this.series.name + ': <b>' + secondsToHms(this.y) + '</b>';
+              }
+
+              return this.series.name + ': <b>' + this.y + '</b>';
             }
           },
           yAxis: {
