@@ -17,7 +17,7 @@
 
     vm.checkedIn = [];
     vm.activeTab = 1;
-    vm.ctrlName = 'Workout: 6PM RVA';
+    vm.ctrlName = '6PM RVA March 18, 2016';
     vm.username = 'Instructor: ' + currentUser.name;
 
     Member.getMembers()
@@ -30,7 +30,20 @@
       });
 
     vm.checkIn = function (member) {
-      vm.checkedIn.push(member);
-    }
+      if (vm.checkedIn.indexOf(member) > -1) {
+        console.log('Already checked in');
+      } else {
+        vm.checkedIn.push(member);
+      }
+    };
+
+    vm.remove = function (member) {
+      var index = vm.checkedIn.indexOf(member);
+      if (index > -1) {
+        vm.checkedIn.splice(index, 1);
+      } else {
+        console.log('Not found in checked in list');
+      }
+    };
   }
 }());
