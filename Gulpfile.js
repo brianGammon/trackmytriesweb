@@ -39,7 +39,7 @@ config.appIconFiles = [
 config.appMarkupFiles = path.join(config.appDir, '**/*.html');
 config.appScriptFiles = path.join(config.appDir, '**/*.js');
 config.appStyleFiles = path.join(config.appDir, '**/*.css');
-config.appSampleDataFiles = path.join(config.appDir, 'sample-data-*.json');
+config.appSampleDataFiles = path.join(config.appDir, '**/fake*.json');
 
 config.buildDirectiveTemplateFiles = path.join(config.buildDir, '**/*directive.tpl.html');
 config.buildJsFiles = path.join(config.buildJs, '**/*.js');

@@ -22,6 +22,15 @@ module.exports = function (gulp, $, config) {
       .pipe(gulp.dest(config.buildDir));
   });
 
+  
+  gulp.task('sampleData', ['clean'], function () {
+    return gulp.src([
+      config.appSampleDataFiles
+    ])
+      .pipe(gulp.dest(config.buildDir));
+  });
+
+
   // compile styles and copy into build directory
   gulp.task('styles', ['clean'], function () {
     return gulp.src([
@@ -280,7 +289,7 @@ module.exports = function (gulp, $, config) {
   });
 
 
-  gulp.task('build', ['deleteTemplates', 'bowerAssets', 'images', 'favicon', 'fonts', 'api', 'copyserver']);
+  gulp.task('build', ['deleteTemplates', 'bowerAssets', 'images', 'favicon', 'fonts', 'api', 'copyserver', 'sampleData']);
 
 
 };

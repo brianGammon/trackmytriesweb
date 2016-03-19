@@ -17,6 +17,7 @@
       'about',
       'user',
       'item',
-      'core'
+      'core',
+      'workout'
     ]);
 }());

@@ -1,0 +1,43 @@
+<div class="main-content">
+  	<h1>{{workout.ctrlName}}</h1>
+  	<p>{{workout.username}}</p>
+	{{workout.errorMessage}}
+ 	<uib-tabset active="active">
+    	<uib-tab index="0">
+    		<uib-tab-heading>
+        		Checked In <span class="badge">{{workout.checkedIn.length}}</span>
+      		</uib-tab-heading>
+
+      		<div class="tab-body">
+      			<div class="alert alert-warning" ng-if="workout.checkedIn.length === 0" role="alert">No one checked in yet</div>
+
+	    		<ul ng-repeat='member in workout.checkedIn'>
+					<li>
+						<img src="{{member.user.picture.thumbnail}}">
+						{{member.user.name.first}} {{member.user.name.last}}
+					</li>	
+				</ul>
+      		</div>      		
+    	</uib-tab>
+
+    	<uib-tab index="1" heading="Regulars">
+    		<div class="tab-body">
+	    		<ul ng-repeat='regular in workout.regulars | limitTo : 30'>
+					<li>
+						<img src="{{regular.user.picture.thumbnail}}">
+						{{regular.user.name.first}} {{regular.user.name.last}}
+						<button class="btn btn-sm" ng-click="workout.checkIn(regular)">Check In</button>					
+					</li>	
+				</ul>
+			</div>
+    	</uib-tab>
+
+    	<uib-tab index="2" heading="Guests">
+    		Add a guest, or manual member...
+    	</uib-tab>
+
+    	<uib-tab index="3" heading="Find a Member">
+    		Search for a member to check them in...
+    	</uib-tab>
+	</uib-tabset>  	
+</div>
