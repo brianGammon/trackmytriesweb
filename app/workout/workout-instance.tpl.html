@@ -1,0 +1,36 @@
+<div class="main-content">
+    <ol class="breadcrumb">
+      <li><a ui-sref="workout">Workouts</a></li>
+      <li><a ui-sref="workout-date({workoutId: wi.instance.workout.id})">Dates</a></li>
+      <li class="active">{{wi.isToday ? "Today" : wi.workoutDate}}</li>
+    </ol>
+  	<h4>{{wi.instance.workout.name}} on {{wi.workoutDate}}</h4>
+
+    <a class="btn btn-lg btn-block btn-primary">
+      Instructor: {{wi.instance.instructor}}
+    </a>
+
+    <a class="btn btn-lg btn-block btn-primary">
+      Venue: {{wi.instance.venue.name}}
+    </a>
+
+    <a class="btn btn-lg btn-block btn-primary" ui-sref="workout-attendance({workoutId: wi.instance.workout.id, workoutDate: wi.instance.date})">
+      Attendance <span class="badge">{{wi.instance.attendance.length}}</span>
+    </a>
+
+    <div class="form-group">
+      <label for="note" class="control-label">Workout Notes</label>
+      <textarea class='form-control' data-ng-model='wi.instance.notes' cols="20" maxlength='500' name="note" rows="2">
+      </textarea>
+    </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Weather</h3>
+      </div>
+      <div class="panel-body">
+        Weather:
+        {{wi.instance.weather}}
+      </div>
+    </div>
+</div>

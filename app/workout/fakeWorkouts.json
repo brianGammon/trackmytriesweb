@@ -1,0 +1,139 @@
+[
+  {
+    "id": "RVA545",
+    "name": "Richmond 5:45am",
+    "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "venues": [
+      {
+        "name": "Bryan Park",
+        "description": "Park near the soccer fields",
+        "lat": 123.09,
+        "long": 321.0
+      },
+      {
+        "name": "Dogwood Dell",
+        "description": "Park in the main lot near the amphitheater",
+        "lat": 123.09,
+        "long": 321.0
+      },
+      {
+        "name": "Belle Isle",
+        "description": "Park in the Tredegar lot",
+        "lat": 123.09,
+        "long": 321.0
+      }
+    ]
+  },
+  {
+    "id": "RVA930",
+    "name": "Richmond 9:30am",
+    "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "venues": [
+      {
+        "name": "Bryan Park",
+        "description": "Park near the soccer fields",
+        "lat": 123.09,
+        "long": 321.0
+      },
+      {
+        "name": "Dogwood Dell",
+        "description": "Park in the main lot near the amphitheater",
+        "lat": 123.09,
+        "long": 321.0
+      },
+      {
+        "name": "Belle Isle",
+        "description": "Park in the Tredegar lot",
+        "lat": 123.09,
+        "long": 321.0
+      }
+    ]
+  },
+  {
+    "id": "RVA6PM",
+    "name": "Richmond 6:00pm",
+    "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "venues": [
+      {
+        "name": "Bryan Park",
+        "description": "Park near the soccer fields",
+        "lat": 123.09,
+        "long": 321.0
+      },
+      {
+        "name": "Dogwood Dell",
+        "description": "Park in the main lot near the amphitheater",
+        "lat": 123.09,
+        "long": 321.0
+      },
+      {
+        "name": "Belle Isle",
+        "description": "Park in the Tredegar lot",
+        "lat": 123.09,
+        "long": 321.0
+      }
+    ]
+  },
+  {
+    "id": "WE545AM",
+    "name": "West End 5:45am",
+    "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "venues": [
+      {
+        "name": "Lake Rooty",
+        "description": "Park near the soccer fields",
+        "lat": 123.09,
+        "long": 321.0
+      },
+      {
+        "name": "Waterfront Lake",
+        "description": "Park in the main lot near the amphitheater",
+        "lat": 123.09,
+        "long": 321.0
+      },
+      {
+        "name": "Striker Park",
+        "description": "Park in the Tredegar lot",
+        "lat": 123.09,
+        "long": 321.0
+      }
+    ]
+  },
+  {
+    "id": "WE6PM",
+    "name": "West End 6:00pm",
+    "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "venues": [
+      {
+        "name": "Lake Rooty",
+        "description": "Park near the soccer fields",
+        "lat": 123.09,
+        "long": 321.0
+      },
+      {
+        "name": "Waterfront Lake",
+        "description": "Park in the main lot near the amphitheater",
+        "lat": 123.09,
+        "long": 321.0
+      },
+      {
+        "name": "Striker Park",
+        "description": "Park in the Tredegar lot",
+        "lat": 123.09,
+        "long": 321.0
+      }
+    ]
+  },
+  {
+    "id": "CVL6AM",
+    "name": "Charlottesville 6:00am"
+  },
+  {
+    "id": "PHL545",
+    "name": "Philadelphia 5:45am"
+  },
+  {
+    "id": "DC545AM",
+    "name": "Washington, DC 5:45am"
+  }
+]

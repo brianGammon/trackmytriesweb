@@ -1,4 +1,14 @@
 <div class="main-content">
-  	<h4>{{wo.ctrlName}}</h4>
-  	<p>{{wo.username}}</p>	
+  <ol class="breadcrumb">
+    <li><a ui-sref="workout">Workouts</a></li>
+    <li class="active">Dates</li>
+  </ol>
+
+	<h4>{{wd.workoutInstances[0].workout.name}}</h4>
+
+  <div class="workout-list" ng-repeat="workout in wd.workoutInstances">
+    <a class="btn btn-block btn-lg btn-primary" ui-sref="workout-instance({workoutId: workout.workout.id, workoutDate: workout.date})">
+      {{workout.date === wd.today ? "Today": workout.date}}
+    </a>
+  </div>
 </div>

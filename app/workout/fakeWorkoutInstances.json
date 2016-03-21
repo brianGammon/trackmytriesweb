@@ -1,0 +1,274 @@
+[
+  {
+    "date": "2016-03-20",
+    "workout": {
+      "id": "RVA545",
+      "name": "Richmond 5:45am",
+      "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "venues": [
+        {
+          "name": "Bryan Park",
+          "description": "Park near the soccer fields",
+          "lat": 123.09,
+          "long": 321.0
+        },
+        {
+          "name": "Dogwood Dell",
+          "description": "Park in the main lot near the amphitheater",
+          "lat": 123.09,
+          "long": 321.0
+        },
+        {
+          "name": "Belle Isle",
+          "description": "Park in the Tredegar lot",
+          "lat": 123.09,
+          "long": 321.0
+        }
+      ]
+    },
+    "venue": {
+      "name": "Bryan Park",
+      "description": "Park near the soccer fields",
+      "lat": 123.09,
+      "long": 321.0
+    },
+    "instructor": "John McGuire",
+    "weather": {
+      "temp": "66 Degrees F",
+      "sky": "Partly Cloudy",
+      "precipitation": "None"
+    },
+    "notes": "Someone went home early after falling off the log",
+    "attendance": [
+      {
+        "user": {
+          "gender": "male",
+          "name": {
+            "title": "mr",
+            "first": "jimmie",
+            "last": "cooper"
+          },
+          "location": {
+            "street": "8270 locust rd",
+            "city": "pueblo",
+            "state": "wyoming",
+            "zip": 76928
+          },
+          "email": "jimmie.cooper@example.com",
+          "username": "tinygoose403",
+  				"preferredWorkout": "6PMWE",
+          "registered": 977137793,
+          "dob": 58259682,
+          "phone": "(777)-857-5342",
+          "cell": "(872)-228-0828",
+          "SSN": "484-26-1634",
+          "picture": {
+            "large": "https://randomuser.me/api/portraits/men/60.jpg",
+            "medium": "https://randomuser.me/api/portraits/med/men/60.jpg",
+            "thumbnail": "https://randomuser.me/api/portraits/thumb/men/60.jpg"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "date": "2016-03-19",
+    "workout": {
+      "id": "RVA545",
+      "name": "Richmond 5:45am"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-18",
+    "workout": {
+      "id": "RVA545",
+      "name": "Richmond 5:45am"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-17",
+    "workout": {
+      "id": "RVA545",
+      "name": "Richmond 5:45am"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-16",
+    "workout": {
+      "id": "RVA545",
+      "name": "Richmond 5:45am"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-15",
+    "workout": {
+      "id": "RVA545",
+      "name": "Richmond 5:45am"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-14",
+    "workout": {
+      "id": "RVA545",
+      "name": "Richmond 5:45am"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-20",
+    "workout": {
+      "id": "RVA6PM",
+      "name": "Richmond 6:00pm"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-19",
+    "workout": {
+      "id": "RVA6PM",
+      "name": "Richmond 6:00pm"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-18",
+    "workout": {
+      "id": "RVA6PM",
+      "name": "Richmond 6:00pm"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-17",
+    "workout": {
+      "id": "RVA6PM",
+      "name": "Richmond 6:00pm"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-16",
+    "workout": {
+      "id": "RVA6PM",
+      "name": "Richmond 6:00pm"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-15",
+    "workout": {
+      "id": "RVA6PM",
+      "name": "Richmond 6:00pm"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-14",
+    "workout": {
+      "id": "RVA6PM",
+      "name": "Richmond 6:00pm"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-20",
+    "workout": {
+      "id": "RVA930",
+      "name": "Richmond 9:30am"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-19",
+    "workout": {
+      "id": "RVA930",
+      "name": "Richmond 9:30am"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-18",
+    "workout": {
+      "id": "RVA930",
+      "name": "Richmond 9:30am"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-17",
+    "workout": {
+      "id": "RVA930",
+      "name": "Richmond 9:30am"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-16",
+    "workout": {
+      "id": "RVA930",
+      "name": "Richmond 9:30am"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-15",
+    "workout": {
+      "id": "RVA930",
+      "name": "Richmond 9:30am"
+    },
+    "attendance": [
+
+    ]
+  },
+  {
+    "date": "2016-03-14",
+    "workout": {
+      "id": "RVA930",
+      "name": "Richmond 9:30am"
+    },
+    "attendance": [
+
+    ]
+  }
+]

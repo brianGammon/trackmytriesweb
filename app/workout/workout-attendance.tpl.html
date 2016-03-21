@@ -1,0 +1,108 @@
+<div class="main-content">
+  <ol class="breadcrumb">
+    <li><a ui-sref="workout">Workouts</a></li>
+    <li><a ui-sref="workout-date({workoutId: wa.workoutId})">Dates</a></li>
+    <li>
+      <a ui-sref="workout-instance({workoutId: wa.workoutId, workoutDate: wa.workoutDate})">
+        {{wa.isToday ? "Today" : wa.workoutDate}}
+      </a>
+    </li>
+    <li class="active">Attendance</li>
+  </ol>
+
+  <h4>{{wa.instance.workout.name || "Richmond 5:45am"}} on {{wa.workoutDate}}</h4>
+
+ 	<uib-tabset active="active">
+    	<uib-tab index="0">
+    		<uib-tab-heading>
+        		Checked In <span class="badge">{{wa.checkedIn.length}}</span>
+      		</uib-tab-heading>
+
+      		<div class="tab-body">
+      			<div class="alert alert-warning" ng-if="wa.checkedIn.length === 0" role="alert">No one checked in yet</div>
+
+            <div ng-repeat='member in wa.checkedIn' class="row vertical-center">
+              <div class="col-xs-3 col-sm-1">
+                <img ng-src="{{member.user.picture.thumbnail}}">
+              </div>
+              <div class="col-xs-6 col-sm-7">
+                <div class="membername">
+                  <strong>{{member.user.name.first}} {{member.user.name.last}}</strong>
+                </div>
+                <div class="memberdob">
+                  <small>Birthday: {{member.user.dob | date:'MMM d'}}</small>
+                </div>
+                <div class="memberphone">
+                  <small>Phone: {{member.user.phone}}</small>
+                </div>
+              </div>
+              <div class="col-xs-3">
+                <button class="btn btn-xs btn-danger pull-right" ng-click="wa.remove(member)">
+                  Remove
+                  <i class="fa fa-times"></i>
+                </button>
+              </div>
+            </div>
+	    		  <!-- <ul ng-repeat='member in wa.checkedIn'>
+    					<li>
+    						<img ng-src="{{member.user.picture.thumbnail}}">
+    						{{member.user.name.first}} {{member.user.name.last}}
+                <button class="btn btn-sm" ng-click="wa.remove(member)">
+                  Remove
+                  <i class="fa fa-times"></i>
+                </button>
+    					</li>
+    				</ul> -->
+      		</div>
+    	</uib-tab>
+
+    	<uib-tab index="1" heading="Regulars">
+    		<div class="tab-body">
+          <label>Search: <input ng-model="wa.regSearchText"></label>
+          <div ng-repeat="regular in wa.regulars | orderBy:'user.name.last' | filter: wa.regSearchText" class="row vertical-center">
+            <div class="col-xs-3 col-sm-1">
+              <img ng-src="{{regular.user.picture.thumbnail}}">
+            </div>
+            <div class="col-xs-6 col-sm-7">
+              <div class="membername">
+                <strong>{{regular.user.name.first}} {{regular.user.name.last}}</strong>
+              </div>
+              <div class="memberdob">
+                <small>Birthday: {{regular.user.dob | date:'MMM d'}}</small>
+              </div>
+              <div class="memberphone">
+                <small>Phone: {{regular.user.phone}}</small>
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <button ng-class="wa.checkedIn.indexOf(regular) > -1 ? 'btn-success' : 'btn-primary'" class="btn btn-xs pull-right" ng-click="wa.checkIn(regular)">
+                {{wa.checkedIn.indexOf(regular) > -1 ? "Checked In" : "Check In"}}
+                <i ng-if="wa.checkedIn.indexOf(regular) > -1" class="fa fa-check-circle"></i>
+              </button>
+            </div>
+          </div>
+
+	    		<!-- <ul ng-repeat="regular in wa.regulars | orderBy:'user.name.last' | filter: wa.regSearchText">
+					<li>
+						<img ng-src="{{regular.user.picture.thumbnail}}">
+						{{regular.user.name.first}} {{regular.user.name.last}}
+						<button class="btn btn-sm" ng-click="wa.checkIn(regular)">
+              Check In
+              <i ng-if="wa.checkedIn.indexOf(regular) > -1" class="fa fa-check-circle"></i>
+            </button>
+
+					</li>
+				</ul> -->
+			</div>
+    	</uib-tab>
+
+    	<uib-tab index="2" heading="Other Members">
+        <label>Search: <input ng-model="wa.memSearchText"></label>
+    		Search for a member to check them in...
+    	</uib-tab>
+
+      <uib-tab index="3" heading="Guests">
+    		Add a guest, or manual member...
+    	</uib-tab>
+	</uib-tabset>
+</div>
