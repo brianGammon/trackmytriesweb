@@ -39,11 +39,17 @@
 
   <div class="row top-space">
     <div class="col-sm-6">
-      <div class="form-group">
-        <label for="note" class="control-label">Workout Notes</label>
-        <textarea class='form-control' data-ng-model='wi.instance.notes' cols="20" maxlength='500' name="note" rows="2">
-        </textarea>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Workout Notes</h3>
+        </div>
+        <div class="panel-body">
+          <textarea class='form-control' data-ng-model='wi.instance.notes' cols="20" maxlength='500' name="note" rows="2">
+          </textarea>
+          <button class="btn btn-xs btn-primary pull-right top-space">Save Notes</button>
+        </div>
       </div>
+      
     </div>
     <div class="col-sm-6">
       <div class="panel panel-primary">
@@ -51,9 +57,17 @@
           <h3 class="panel-title">Weather</h3>
         </div>
         <div class="panel-body">
-          <div>Temp: {{wi.instance.weather.temp}}</div>
-          <div>Sky: {{wi.instance.weather.sky}}</div>
-          <div>Precipitation: {{wi.instance.weather.precipitation}}</div>
+          <div><strong>Workout Conditions:</strong> {{wi.instance.weather.conditions || "Not Set"}}</div>
+          <div style="width: 100%;" class="btn-group btn-block">
+            <label class="btn btn-success" ng-model="wi.instance.weather.conditions" uib-btn-radio="'Pleasant'" uncheckable>Pleasant</label>
+            <label class="btn btn-warning" ng-model="wi.instance.weather.conditions" uib-btn-radio="'Average'" uncheckable>Average</label>
+            <label class="btn btn-danger" ng-model="wi.instance.weather.conditions" uib-btn-radio="'Poor'" uncheckable>Poor</label>
+          </div>
+          <div class="weather-conditions">
+            <div><strong>Temp:</strong> {{wi.instance.weather.temp}}</div>
+            <div><strong>Sky:</strong> {{wi.instance.weather.sky}}</div>
+            <div><strong>Precipitation:</strong> {{wi.instance.weather.precipitation}}</div>
+          </div>
         </div>
       </div>
     </div>

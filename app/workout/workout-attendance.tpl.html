@@ -11,8 +11,8 @@
   </ol>
 
   <h4>{{wa.instance.workout.name || "Richmond 5:45am"}} on {{wa.workoutDate}}</h4>
-
- 	<uib-tabset active="active">
+ 	
+  <uib-tabset active="active">
     	<uib-tab index="0">
     		<uib-tab-heading>
         		Checked In <span class="badge">{{wa.checkedIn.length}}</span>
@@ -21,7 +21,7 @@
       		<div class="tab-body">
       			<div class="alert alert-warning" ng-if="wa.checkedIn.length === 0" role="alert">No one checked in yet</div>
 
-            <div ng-repeat='member in wa.checkedIn' class="row vertical-center">
+            <div ng-repeat='member in wa.checkedIn' class="row vertical-center checkedin-block">
               <div class="col-xs-3 col-sm-1">
                 <img ng-src="{{member.user.picture.thumbnail}}">
               </div>
@@ -56,31 +56,78 @@
       		</div>
     	</uib-tab>
 
-    	<uib-tab index="1" heading="Regulars">
+    	<uib-tab index="1" heading="Add People">
     		<div class="tab-body">
-          <label>Search: <input ng-model="wa.regSearchText"></label>
-          <div ng-repeat="regular in wa.regulars | orderBy:'user.name.last' | filter: wa.regSearchText" class="row vertical-center">
-            <div class="col-xs-3 col-sm-1">
-              <img ng-src="{{regular.user.picture.thumbnail}}">
+          <div class="btn-group button-menu">
+              <label class="btn btn-primary" ng-model="wa.searchType" uib-btn-radio="'Regulars'">Regulars</label>
+              <label class="btn btn-primary" ng-model="wa.searchType" uib-btn-radio="'Others'">Other Members</label>
+              <label class="btn btn-primary" ng-model="wa.searchType" uib-btn-radio="'Guests'">Guests</label>
+          </div>
+
+          <div class="top-space" ng-show="wa.searchType === 'Regulars'">
+            <div class="input-group">
+              <input type="text" class="form-control" ng-model="wa.regSearchText" placeholder="Search for member...">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="wa.regSearchText = ''"><span class="glyphicon glyphicon-remove"></span></button>
+              </span>
             </div>
-            <div class="col-xs-6 col-sm-7">
-              <div class="membername">
-                <strong>{{regular.user.name.first}} {{regular.user.name.last}}</strong>
+            <div ng-repeat="regular in wa.regulars | orderBy:'user.name.last' | filter: wa.regSearchText" class="row vertical-center person-block">
+              <div class="col-xs-3 col-sm-1">
+                <img ng-src="{{regular.user.picture.thumbnail}}">
               </div>
-              <div class="memberdob">
-                <small>Birthday: {{regular.user.dob | date:'MMM d'}}</small>
+              <div class="col-xs-6 col-sm-7">
+                <div class="membername">
+                  <strong>{{regular.user.name.first}} {{regular.user.name.last}}</strong>
+                </div>
+                <div class="memberdob">
+                  <small>Birthday: {{regular.user.dob | date:'MMM d'}}</small>
+                </div>
+                <div class="memberphone">
+                  <small>Phone: {{regular.user.phone}}</small>
+                </div>
               </div>
-              <div class="memberphone">
-                <small>Phone: {{regular.user.phone}}</small>
+              <div class="col-xs-3">
+                <button ng-class="wa.checkedIn.indexOf(regular) > -1 ? 'btn-success' : 'btn-primary'" class="btn btn-xs pull-right" ng-click="wa.checkIn(regular)">
+                  {{wa.checkedIn.indexOf(regular) > -1 ? "Checked In" : "Check In"}}
+                  <i ng-if="wa.checkedIn.indexOf(regular) > -1" class="fa fa-check-circle"></i>
+                </button>
               </div>
-            </div>
-            <div class="col-xs-3">
-              <button ng-class="wa.checkedIn.indexOf(regular) > -1 ? 'btn-success' : 'btn-primary'" class="btn btn-xs pull-right" ng-click="wa.checkIn(regular)">
-                {{wa.checkedIn.indexOf(regular) > -1 ? "Checked In" : "Check In"}}
-                <i ng-if="wa.checkedIn.indexOf(regular) > -1" class="fa fa-check-circle"></i>
-              </button>
             </div>
           </div>
+          
+          <div class="top-space" ng-show="wa.searchType === 'Others'">
+            <input type="text" class="form-control" ng-model="wa.regSearchText" placeholder="Search for member...">
+          </div>
+          
+          <div class="top-space" ng-show="wa.searchType === 'Guests'">
+            Guests
+          </div>
+          
+          <!-- <uib-accordion close-others="true">  
+            <uib-accordion-group is-open="regulars.open" panel-class="panel-primary">
+              <uib-accordion-heading>
+                Regulars <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': regulars.open, 'glyphicon-chevron-right': !regulars.open}"></i>
+              </uib-accordion-heading>
+              
+              
+            </uib-accordion-group>
+            
+            <uib-accordion-group is-open="others.open" panel-class="panel-primary">
+              <uib-accordion-heading>
+                Other Members <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': others.open, 'glyphicon-chevron-right': !others.open}"></i>
+              </uib-accordion-heading>
+              This content is straight in the template.
+            </uib-accordion-group>
+            
+            <uib-accordion-group is-open="guests.open" panel-class="panel-primary">
+              <uib-accordion-heading>
+                Guests <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': guests.open, 'glyphicon-chevron-right': !guests.open}"></i>
+              </uib-accordion-heading>
+              This content is straight in the template.
+            </uib-accordion-group>
+          </uib-accordion> -->
+          
+
 
 	    		<!-- <ul ng-repeat="regular in wa.regulars | orderBy:'user.name.last' | filter: wa.regSearchText">
 					<li>
@@ -94,15 +141,6 @@
 					</li>
 				</ul> -->
 			</div>
-    	</uib-tab>
-
-    	<uib-tab index="2" heading="Other Members">
-        <label>Search: <input ng-model="wa.memSearchText"></label>
-    		Search for a member to check them in...
-    	</uib-tab>
-
-      <uib-tab index="3" heading="Guests">
-    		Add a guest, or manual member...
     	</uib-tab>
 	</uib-tabset>
 </div>

@@ -9,8 +9,8 @@
         {
           "name": "Bryan Park",
           "description": "Park near the soccer fields",
-          "lat": 123.09,
-          "long": 321.0
+          "lat": 37.595931,
+          "long": -77.471675
         },
         {
           "name": "Dogwood Dell",
@@ -29,6 +29,7 @@
     "venue": null,
     "instructor": null,
     "weather": {
+      "conditions": null,
       "temp": "66 Degrees F",
       "sky": "Partly Cloudy",
       "precipitation": "None"

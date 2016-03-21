@@ -15,6 +15,7 @@
   function WorkoutAttendanceCtrl(currentUser, Member, $stateParams, $filter) {
     var vm = this;
 
+    vm.searchType = 'Regulars';
     vm.workoutId = $stateParams.workoutId;
     vm.workoutDate = $filter('date')($stateParams.workoutDate, 'yyyy-MM-dd');
     vm.isToday = $filter('date')($stateParams.workoutDate, 'yyyy-MM-dd') ===

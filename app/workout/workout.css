@@ -1,3 +1,11 @@
+.checkedin-block {
+  border-bottom: 1px solid #ddd;
+}
+
+.person-block {
+  border-bottom: 1px solid #337ab7;
+}
+
 .tab-body {
 	padding-top: 10px;
 }
@@ -22,7 +30,18 @@
 
 .tab-body .row {
 		text-transform: capitalize;
-		margin-bottom: 5px;
+		padding: 5px 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.weather-conditions {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.weather-conditions > div {
+  display: inline-block;
 }
 
 .button-menu {
