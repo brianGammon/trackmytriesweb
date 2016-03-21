@@ -26,13 +26,8 @@
         }
       ]
     },
-    "venue": {
-      "name": "Bryan Park",
-      "description": "Park near the soccer fields",
-      "lat": 123.09,
-      "long": 321.0
-    },
-    "instructor": "John McGuire",
+    "venue": null,
+    "instructor": null,
     "weather": {
       "temp": "66 Degrees F",
       "sky": "Partly Cloudy",
