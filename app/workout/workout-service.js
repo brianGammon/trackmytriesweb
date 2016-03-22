@@ -52,7 +52,7 @@
       if ($localStorage.instances) {
         console.log('Getting single instance from storage');
         instance = $filter('filter')($localStorage.instances, {date: workoutDate, workout: {id: workoutId}});
-        deferred.resolve($localStorage.instances[0]);
+        deferred.resolve(instance[0]);
         return deferred.promise;
       }
 

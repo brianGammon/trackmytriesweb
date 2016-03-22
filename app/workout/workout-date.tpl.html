@@ -1,14 +1,14 @@
 <div class="main-content">
   <ol class="breadcrumb">
-    <li><a ui-sref="workout">Workouts</a></li>
-    <li class="active">Dates</li>
+    <li><a ui-sref="workout">Location</a></li>
+    <li class="active">Schedule</li>
   </ol>
 
-	<h4>{{wd.workoutInstances[0].workout.name}}</h4>
+	<h4>This week's schedule for {{wd.workoutInstances[0].workout.name}}</h4>
 
   <div class="workout-list" ng-repeat="workout in wd.workoutInstances">
     <a class="btn btn-block btn-lg btn-primary" ui-sref="workout-instance({workoutId: workout.workout.id, workoutDate: workout.date})">
-      {{workout.date === wd.today ? "Today": workout.date}}
+      {{workout.date === wd.today ? "Today": (workout.date | workoutDate)}} - {{workout.venue.name || "Location TBD"}}
     </a>
   </div>
 </div>

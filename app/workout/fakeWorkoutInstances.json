@@ -1,45 +1,6 @@
 [
   {
     "week": "12",
-    "date": "2016-03-22",
-    "workout": {
-      "id": "RVA545",
-      "name": "Richmond 5:45am",
-      "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      "venues": [
-        {
-          "name": "Bryan Park",
-          "description": "Park near the soccer fields",
-          "lat": 37.595931,
-          "long": -77.471675
-        },
-        {
-          "name": "Dogwood Dell",
-          "description": "Park in the main lot near the amphitheater",
-          "lat": 123.09,
-          "long": 321.0
-        },
-        {
-          "name": "Belle Isle",
-          "description": "Park in the Tredegar lot",
-          "lat": 123.09,
-          "long": 321.0
-        }
-      ]
-    },
-    "venue": null,
-    "instructor": null,
-    "weather": {
-      "conditions": null,
-      "temp": "66 Degrees F",
-      "sky": "Partly Cloudy",
-      "precipitation": "None"
-    },
-    "notes": "Brian went home early after rolling an ankle.",
-    "attendance": []
-  },
-  {
-    "week": "12",
     "date": "2016-03-21",
     "workout": {
       "id": "RVA545",
@@ -66,10 +27,15 @@
         }
       ]
     },
-    "venue": null,
-    "instructor": null,
+    "venue": {
+      "name": "Bryan Park",
+      "description": "Park near the soccer fields",
+      "lat": 37.595931,
+      "long": -77.471675
+    },
+    "instructor": "John Geise",
     "weather": {
-      "conditions": null,
+      "conditions": "Average",
       "temp": "66 Degrees F",
       "sky": "Partly Cloudy",
       "precipitation": "None"
@@ -92,7 +58,7 @@
           },
           "email": "jimmie.cooper@example.com",
           "username": "tinygoose403",
-  				"preferredWorkout": "6PMWE",
+          "preferredWorkout": "6PMWE",
           "registered": 977137793,
           "dob": 58259682,
           "phone": "(777)-857-5342",
@@ -104,11 +70,273 @@
             "thumbnail": "https://randomuser.me/api/portraits/thumb/men/60.jpg"
           }
         }
+      },
+      {
+        "user": {
+          "gender": "male",
+          "name": {
+            "title": "mr",
+            "first": "chad",
+            "last": "adams"
+          },
+          "location": {
+            "street": "1843 taylor st",
+            "city": "el monte",
+            "state": "new mexico",
+            "zip": 14973
+          },
+          "email": "chad.adams@example.com",
+          "username": "yellowmeercat550",
+          "preferredWorkout": "6PMRVA",
+          "registered": 1118705969,
+          "dob": 426801163,
+          "phone": "(492)-592-8808",
+          "cell": "(222)-250-5734",
+          "SSN": "104-46-5084",
+          "picture": {
+            "large": "https://randomuser.me/api/portraits/men/89.jpg",
+            "medium": "https://randomuser.me/api/portraits/med/men/89.jpg",
+            "thumbnail": "https://randomuser.me/api/portraits/thumb/men/89.jpg"
+          }
+        }
+      },
+      {
+        "user": {
+          "gender": "female",
+          "name": {
+            "title": "ms",
+            "first": "rose",
+            "last": "allen"
+          },
+          "location": {
+            "street": "1713 stevens creek blvd",
+            "city": "anna",
+            "state": "indiana",
+            "zip": 90549
+          },
+          "email": "rose.allen@example.com",
+          "username": "ticklishwolf918",
+          "preferredWorkout": "6PMRVA",
+          "registered": 1377738377,
+          "dob": 516425691,
+          "phone": "(345)-653-0529",
+          "cell": "(797)-043-5257",
+          "SSN": "739-05-2364",
+          "picture": {
+            "large": "https://randomuser.me/api/portraits/women/18.jpg",
+            "medium": "https://randomuser.me/api/portraits/med/women/18.jpg",
+            "thumbnail": "https://randomuser.me/api/portraits/thumb/women/18.jpg"
+          }
+        }
+      },
+      {
+        "user": {
+          "gender": "male",
+          "name": {
+            "title": "mr",
+            "first": "edgar",
+            "last": "arnold"
+          },
+          "location": {
+            "street": "1152 robinson rd",
+            "city": "los angeles",
+            "state": "tennessee",
+            "zip": 65537
+          },
+          "email": "edgar.arnold@example.com",
+          "username": "organiccat957",
+          "preferredWorkout": "6PMRVA",
+          "registered": 1089915715,
+          "dob": 1402220505,
+          "phone": "(788)-425-0530",
+          "cell": "(502)-772-3376",
+          "SSN": "080-19-3230",
+          "picture": {
+            "large": "https://randomuser.me/api/portraits/men/79.jpg",
+            "medium": "https://randomuser.me/api/portraits/med/men/79.jpg",
+            "thumbnail": "https://randomuser.me/api/portraits/thumb/men/79.jpg"
+          }
+        }
+      },
+      {
+        "user": {
+          "gender": "female",
+          "name": {
+            "title": "ms",
+            "first": "nellie",
+            "last": "banks"
+          },
+          "location": {
+            "street": "6972 oak ridge ln",
+            "city": "carlsbad",
+            "state": "nebraska",
+            "zip": 41656
+          },
+          "email": "nellie.banks@example.com",
+          "username": "organicbird673",
+          "preferredWorkout": "6PMRVA",
+          "registered": 975678744,
+          "dob": 1225087674,
+          "phone": "(562)-868-7273",
+          "cell": "(865)-753-1333",
+          "SSN": "350-65-6119",
+          "picture": {
+            "large": "https://randomuser.me/api/portraits/women/16.jpg",
+            "medium": "https://randomuser.me/api/portraits/med/women/16.jpg",
+            "thumbnail": "https://randomuser.me/api/portraits/thumb/women/16.jpg"
+          }
+        }
+      },
+      {
+        "user": {
+          "gender": "female",
+          "name": {
+            "title": "ms",
+            "first": "naomi",
+            "last": "barnett"
+          },
+          "location": {
+            "street": "2235 paddock way",
+            "city": "concord",
+            "state": "alabama",
+            "zip": 66457
+          },
+          "email": "naomi.barnett@example.com",
+          "username": "crazyduck382",
+          "preferredWorkout": "6PMRVA",
+          "registered": 960733747,
+          "dob": 1255982291,
+          "phone": "(887)-996-0083",
+          "cell": "(815)-869-1981",
+          "SSN": "778-96-4129",
+          "picture": {
+            "large": "https://randomuser.me/api/portraits/women/15.jpg",
+            "medium": "https://randomuser.me/api/portraits/med/women/15.jpg",
+            "thumbnail": "https://randomuser.me/api/portraits/thumb/women/15.jpg"
+          }
+        }
+      },
+      {
+        "user": {
+          "gender": "female",
+          "name": {
+            "title": "miss",
+            "first": "sophia",
+            "last": "beck"
+          },
+          "location": {
+            "street": "9894 homestead rd",
+            "city": "eugene",
+            "state": "wisconsin",
+            "zip": 48234
+          },
+          "email": "sophia.beck@example.com",
+          "username": "smallbutterfly927",
+          "preferredWorkout": "6PMRVA",
+          "registered": 1198500490,
+          "dob": 369410298,
+          "phone": "(035)-595-4403",
+          "cell": "(993)-821-0601",
+          "SSN": "222-83-4774",
+          "picture": {
+            "large": "https://randomuser.me/api/portraits/women/78.jpg",
+            "medium": "https://randomuser.me/api/portraits/med/women/78.jpg",
+            "thumbnail": "https://randomuser.me/api/portraits/thumb/women/78.jpg"
+          }
+        }
+      },
+      {
+        "user": {
+          "gender": "female",
+          "name": {
+            "title": "mrs",
+            "first": "annette",
+            "last": "bishop"
+          },
+          "location": {
+            "street": "5388 valwood pkwy",
+            "city": "st. petersburg",
+            "state": "idaho",
+            "zip": 86076
+          },
+          "email": "annette.bishop@example.com",
+          "username": "whitepanda518",
+          "preferredWorkout": "6PMRVA",
+          "registered": 1233131706,
+          "dob": 238867,
+          "phone": "(002)-467-4157",
+          "cell": "(004)-342-9447",
+          "SSN": "561-98-8411",
+          "picture": {
+            "large": "https://randomuser.me/api/portraits/women/40.jpg",
+            "medium": "https://randomuser.me/api/portraits/med/women/40.jpg",
+            "thumbnail": "https://randomuser.me/api/portraits/thumb/women/40.jpg"
+          }
+        }
+      },
+      {
+        "user": {
+          "gender": "male",
+          "name": {
+            "title": "mr",
+            "first": "ted",
+            "last": "boyd"
+          },
+          "location": {
+            "street": "2665 lone wolf trail",
+            "city": "norfolk",
+            "state": "wisconsin",
+            "zip": 87682
+          },
+          "email": "ted.boyd@example.com",
+          "username": "smallmouse849",
+          "preferredWorkout": "6PMRVA",
+          "registered": 966679270,
+          "dob": 732075319,
+          "phone": "(911)-164-6250",
+          "cell": "(877)-456-6447",
+          "SSN": "935-68-6004",
+          "picture": {
+            "large": "https://randomuser.me/api/portraits/men/63.jpg",
+            "medium": "https://randomuser.me/api/portraits/med/men/63.jpg",
+            "thumbnail": "https://randomuser.me/api/portraits/thumb/men/63.jpg"
+          }
+        }
+      },
+      {
+        "user": {
+          "gender": "female",
+          "name": {
+            "title": "mrs",
+            "first": "pauline",
+            "last": "brooks"
+          },
+          "location": {
+            "street": "4754 smokey ln",
+            "city": "knoxville",
+            "state": "iowa",
+            "zip": 21815
+          },
+          "email": "pauline.brooks@example.com",
+          "username": "lazycat635",
+          "preferredWorkout": "6PMRVA",
+          "registered": 1291469053,
+          "dob": 1145413671,
+          "phone": "(126)-528-9233",
+          "cell": "(862)-608-7024",
+          "SSN": "348-41-0705",
+          "picture": {
+            "large": "https://randomuser.me/api/portraits/women/28.jpg",
+            "medium": "https://randomuser.me/api/portraits/med/women/28.jpg",
+            "thumbnail": "https://randomuser.me/api/portraits/thumb/women/28.jpg"
+          }
+        }
       }
     ]
   },
   {
-    "date": "2016-03-20",
+    "week": "12",
+    "date": "2016-03-22",
     "workout": {
       "id": "RVA545",
       "name": "Richmond 5:45am",
@@ -134,7 +362,12 @@
         }
       ]
     },
-    "venue": null,
+    "venue": {
+      "name": "Belle Isle",
+      "description": "Park in the Tredegar lot",
+      "lat": 123.09,
+      "long": 321.0
+    },
     "instructor": null,
     "weather": {
       "conditions": null,
@@ -142,98 +375,140 @@
       "sky": "Partly Cloudy",
       "precipitation": "None"
     },
-    "notes": "Brian went home early after rolling an ankle.",
-    "attendance": [
-      {
-        "user": {
-          "gender": "male",
-          "name": {
-            "title": "mr",
-            "first": "jimmie",
-            "last": "cooper"
-          },
-          "location": {
-            "street": "8270 locust rd",
-            "city": "pueblo",
-            "state": "wyoming",
-            "zip": 76928
-          },
-          "email": "jimmie.cooper@example.com",
-          "username": "tinygoose403",
-  				"preferredWorkout": "6PMWE",
-          "registered": 977137793,
-          "dob": 58259682,
-          "phone": "(777)-857-5342",
-          "cell": "(872)-228-0828",
-          "SSN": "484-26-1634",
-          "picture": {
-            "large": "https://randomuser.me/api/portraits/men/60.jpg",
-            "medium": "https://randomuser.me/api/portraits/med/men/60.jpg",
-            "thumbnail": "https://randomuser.me/api/portraits/thumb/men/60.jpg"
-          }
+    "notes": "",
+    "attendance": []
+  },
+  {
+    "week": "12",
+    "date": "2016-03-23",
+    "workout": {
+      "id": "RVA545",
+      "name": "Richmond 5:45am",
+      "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "venues": [
+        {
+          "name": "Bryan Park",
+          "description": "Park near the soccer fields",
+          "lat": 37.595931,
+          "long": -77.471675
+        },
+        {
+          "name": "Dogwood Dell",
+          "description": "Park in the main lot near the amphitheater",
+          "lat": 123.09,
+          "long": 321.0
+        },
+        {
+          "name": "Belle Isle",
+          "description": "Park in the Tredegar lot",
+          "lat": 123.09,
+          "long": 321.0
         }
-      }
-    ]
+      ]
+    },
+    "venue": {
+      "name": "Bryan Park",
+      "description": "Park near the soccer fields",
+      "lat": 37.595931,
+      "long": -77.471675
+    },
+    "instructor": null,
+    "weather": {
+      "conditions": null,
+      "temp": "66 Degrees F",
+      "sky": "Partly Cloudy",
+      "precipitation": "None"
+    },
+    "notes": "",
+    "attendance": []
   },
   {
-    "date": "2016-03-19",
+    "week": "12",
+    "date": "2016-03-24",
     "workout": {
       "id": "RVA545",
-      "name": "Richmond 5:45am"
+      "name": "Richmond 5:45am",
+      "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "venues": [
+        {
+          "name": "Bryan Park",
+          "description": "Park near the soccer fields",
+          "lat": 37.595931,
+          "long": -77.471675
+        },
+        {
+          "name": "Dogwood Dell",
+          "description": "Park in the main lot near the amphitheater",
+          "lat": 123.09,
+          "long": 321.0
+        },
+        {
+          "name": "Belle Isle",
+          "description": "Park in the Tredegar lot",
+          "lat": 123.09,
+          "long": 321.0
+        }
+      ]
     },
-    "attendance": [
-
-    ]
+    "venue": {
+      "name": "Dogwood Dell",
+      "description": "Park in the main lot near the amphitheater",
+      "lat": 123.09,
+      "long": 321.0
+    },
+    "instructor": null,
+    "weather": {
+      "conditions": null,
+      "temp": "66 Degrees F",
+      "sky": "Partly Cloudy",
+      "precipitation": "None"
+    },
+    "notes": "",
+    "attendance": []
   },
   {
-    "date": "2016-03-18",
+    "week": "12",
+    "date": "2016-03-25",
     "workout": {
       "id": "RVA545",
-      "name": "Richmond 5:45am"
+      "name": "Richmond 5:45am",
+      "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "venues": [
+        {
+          "name": "Bryan Park",
+          "description": "Park near the soccer fields",
+          "lat": 37.595931,
+          "long": -77.471675
+        },
+        {
+          "name": "Dogwood Dell",
+          "description": "Park in the main lot near the amphitheater",
+          "lat": 123.09,
+          "long": 321.0
+        },
+        {
+          "name": "Belle Isle",
+          "description": "Park in the Tredegar lot",
+          "lat": 123.09,
+          "long": 321.0
+        }
+      ]
     },
-    "attendance": [
-
-    ]
-  },
-  {
-    "date": "2016-03-17",
-    "workout": {
-      "id": "RVA545",
-      "name": "Richmond 5:45am"
+    "venue": {
+      "name": "Belle Isle",
+      "description": "Park in the Tredegar lot",
+      "lat": 123.09,
+      "long": 321.0
     },
-    "attendance": [
-
-    ]
-  },
-  {
-    "date": "2016-03-16",
-    "workout": {
-      "id": "RVA545",
-      "name": "Richmond 5:45am"
+    "instructor": null,
+    "weather": {
+      "conditions": null,
+      "temp": "66 Degrees F",
+      "sky": "Partly Cloudy",
+      "precipitation": "None"
     },
-    "attendance": [
-
-    ]
-  },
-  {
-    "date": "2016-03-15",
-    "workout": {
-      "id": "RVA545",
-      "name": "Richmond 5:45am"
-    },
-    "attendance": [
-
-    ]
-  },
-  {
-    "date": "2016-03-14",
-    "workout": {
-      "id": "RVA545",
-      "name": "Richmond 5:45am"
-    },
-    "attendance": [
-
-    ]
+    "notes": "",
+    "attendance": []
   },
   {
     "date": "2016-03-20",

@@ -1,7 +1,7 @@
 <div class="main-content">
   <ol class="breadcrumb">
-    <li><a ui-sref="workout">Workouts</a></li>
-    <li><a ui-sref="workout-date({workoutId: wi.instance.workout.id})">Dates</a></li>
+    <li><a ui-sref="workout">Location</a></li>
+    <li><a ui-sref="workout-date({workoutId: wi.instance.workout.id})">Schedule</a></li>
     <li class="active">{{wi.isToday ? "Today" : wi.workoutDate}}</li>
   </ol>
 	<h4>{{wi.instance.workout.name}} on {{wi.workoutDate}}</h4>
@@ -33,6 +33,10 @@
     </ul>
   </div>
 
+  <a class="btn btn-lg btn-block btn-primary" href="https://www.google.com/maps/@37.5971076,-77.471966,17z" target="_blank">
+    Map <i class="fa fa-map-marker"></i>
+  </a>
+
   <a class="btn btn-lg btn-block btn-primary" ui-sref="workout-attendance({workoutId: wi.instance.workout.id, workoutDate: wi.instance.date})">
     Attendance <span class="badge">{{wi.instance.attendance.length}}</span>
   </a>
@@ -46,7 +50,7 @@
         <div class="panel-body">
           <textarea class='form-control' data-ng-model='wi.instance.notes' cols="20" maxlength='500' name="note" rows="2">
           </textarea>
-          <button class="btn btn-xs btn-primary pull-right top-space">Save Notes</button>
+          <!-- <button class="btn btn-xs btn-primary pull-right top-space">Save Notes</button> -->
         </div>
       </div>
 
