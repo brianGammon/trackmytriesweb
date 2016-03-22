@@ -11,26 +11,26 @@
   </ol>
 
   <h4>{{wa.instance.workout.name || "Richmond 5:45am"}} on {{wa.workoutDate}}</h4>
- 	
+
   <uib-tabset active="active">
     	<uib-tab index="0">
     		<uib-tab-heading>
-      		Checked In <span class="badge">{{wa.checkedIn.length}}</span>
+      		Checked In <span class="badge">{{wa.instance.attendance.length}}</span>
     		</uib-tab-heading>
 
     		<div class="tab-body">
-    			<div class="alert alert-info" ng-if="wa.checkedIn.length === 0" role="alert">
+    			<div class="alert alert-info" ng-if="wa.instance.attendance.length === 0" role="alert">
             No one is checked in yet
           </div>
 
-          <div class="input-group" ng-if="wa.checkedIn.length > 0">
+          <div class="input-group" ng-if="wa.instance.attendance.length > 0">
             <input type="text" class="form-control" ng-model="wa.checkedInSearchText" placeholder="Search for member...">
             <span class="input-group-btn">
               <button class="btn btn-default" type="button" ng-click="wa.checkedInSearchText = ''"><span class="glyphicon glyphicon-remove"></span></button>
             </span>
         </div>
 
-        <div ng-repeat="member in wa.checkedIn | orderBy:'member.user.name.last' | filter:wa.checkedInSearchText" class="row vertical-center checkedin-block">
+        <div ng-repeat="member in wa.instance.attendance | orderBy:'member.user.name.last' | filter:wa.checkedInSearchText" class="row vertical-center checkedin-block">
           <div class="col-xs-3 col-sm-1">
             <img ng-src="{{member.user.picture.thumbnail}}">
           </div>
@@ -96,18 +96,46 @@
               </div>
             </div>
             <div class="col-xs-3">
-              <button ng-class="wa.checkedIn.indexOf(regular) > -1 ? 'btn-success' : 'btn-primary'" class="btn btn-sm pull-right" ng-click="wa.checkIn(regular)">
-                {{wa.checkedIn.indexOf(regular) > -1 ? "Checked In" : "Check In"}}
-                <i ng-if="wa.checkedIn.indexOf(regular) > -1" class="fa fa-check-circle"></i>
+              <button ng-class="wa.indexOfMember(regular) > -1 ? 'btn-success' : 'btn-primary'" class="btn btn-sm pull-right" ng-click="wa.checkIn(regular)">
+                {{wa.indexOfMember(regular) > -1 ? "Checked In" : "Check In"}}
+                <i ng-if="wa.indexOfMember(regular) > -1" class="fa fa-check-circle"></i>
               </button>
             </div>
           </div>
         </div>
-        
+
         <div class="top-space" ng-show="wa.searchType === 'Others'">
-          <input type="text" class="form-control" ng-model="wa.regSearchText" placeholder="Search for member...">
+          <div class="input-group">
+            <input type="text" class="form-control" ng-model="wa.memSearchText" placeholder="Search for member...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" ng-click="wa.memSearchText = ''"><span class="glyphicon glyphicon-remove"></span></button>
+            </span>
+          </div>
+
+          <div ng-repeat="member in wa.members | orderBy:'member.user.name.last' | filter: wa.memSearchText.length > 0 ? wa.memSearchText : 'XYZ'" class="row vertical-center person-block">
+            <div class="col-xs-3 col-sm-1">
+              <img ng-src="{{member.user.picture.thumbnail}}">
+            </div>
+            <div class="col-xs-6 col-sm-7">
+              <div class="membername">
+                <strong>{{member.user.name.first}} {{member.user.name.last}}</strong>
+              </div>
+              <div class="memberdob">
+                <small>Birthday: {{member.user.dob | date:'MMM d'}}</small>
+              </div>
+              <div class="memberphone">
+                <small>Phone: {{member.user.phone}}</small>
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <button ng-class="wa.indexOfMember(member) > -1 ? 'btn-success' : 'btn-primary'" class="btn btn-sm pull-right" ng-click="wa.checkIn(member)">
+                {{wa.indexOfMember(member) > -1 ? "Checked In" : "Check In"}}
+                <i ng-if="wa.indexOfMember(member) > -1" class="fa fa-check-circle"></i>
+              </button>
+            </div>
+          </div>
         </div>
-        
+
         <div class="top-space" ng-show="wa.searchType === 'Guests'">
           Guests
         </div>
