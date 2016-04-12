@@ -12,25 +12,48 @@
     .module('core')
     .controller('HeaderCtrl', HeaderCtrl);
 
-  function HeaderCtrl($state, Category, User) {
-    var vm = this;
+  function HeaderCtrl($state, $timeout, Category, User, ngToast) {
+    var vm = this,
+        signoutClicked = true;
 
-    function updateUser() {
-      vm.currentUser = User.getUser();
-    }
-
-    Category.getCategories().then(function (result) {
-      vm.categories = result;
+    User.getUser().then(function (user) {
+      // Grab our current user and start listening for sign in changes
+      console.log(user);
+      vm.currentUser = user;
+      User.onSignInChange(updateUser);
     });
 
-    vm.currentUser = User.getUser();
+    vm.categories = Category.getCategories();
 
+    // Handle signing out here
     vm.signout = function () {
-      // localStorage.clearAll();
+      signoutClicked = true;
       User.clear();
-      $state.go('home', {}, {reload: true});
     };
 
-    User.onSignInChange(updateUser);
+    // Internal function for handling login state change
+    function updateUser() {
+      $timeout(function () {
+        // Before asking for the current user, see if we had one before
+        var userBefore = !!vm.currentUser;
+
+        User.getUser().then(function (user) {
+          vm.currentUser = user;
+          if (!vm.currentUser && userBefore) {
+            // No user now, but there was before
+            if (!signoutClicked) {
+              // If logout wasn't clicked, then the firebase session has ended
+              ngToast.info('Sorry, your session has expired.');
+            }
+
+            // Send user back to home page
+            $state.go('home', {}, {reload: true});
+          } else {
+            // Reset click flag for next time
+            signoutClicked = false;
+          }
+        });
+      });
+    }
   }
 }());

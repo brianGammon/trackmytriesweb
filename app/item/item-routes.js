@@ -14,7 +14,9 @@
         controllerAs: 'item',
         resolve: {
           currentUser: ['User', function (User) {
-            return User.signInRequired();
+            return User.signInRequired().then(function () {
+              return User.getUser();
+            });
           }]
         }
       });

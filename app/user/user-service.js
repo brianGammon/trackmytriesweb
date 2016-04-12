@@ -12,46 +12,29 @@
     .module('user')
     .factory('User', User);
 
-  function User($localStorage, $q, jwtHelper) {
+  function User($q, $window, $firebaseAuth, $firebaseObject) {
     var UserBase = {},
-        callbacks = [];
+        callbacks = [],
+        ref = new $window.Firebase('https://trackmytries-dev.firebaseio.com/'),
+        usersRef = ref.child('users'),
+        auth = $firebaseAuth(ref);
 
-    function notifyCallbacks() {
+    auth.$onAuth(function () {
       angular.forEach(callbacks, function (callback) {
         callback();
       });
-    }
-
-    function clearUser() {
-      delete $localStorage.user;
-      delete $localStorage.token;
-      notifyCallbacks();
-    }
-
-    function getCurrentUser() {
-      if ($localStorage.token) {
-        // Make sure token is valid and not expired
-        if (jwtHelper.isTokenExpired($localStorage.token)) {
-          console.log('token is expired');
-          clearUser();
-        }
-      }
-
-      return $localStorage.user;
-    }
+    });
 
     UserBase.getUser = function () {
-      return getCurrentUser();
-    };
+      var deferred = $q.defer(),
+          authInfo = auth.$getAuth();
 
-    UserBase.getToken = function () {
-      return $localStorage.token;
-    };
-
-    UserBase.setUser = function (data) {
-      $localStorage.user = data.user;
-      $localStorage.token = data.token;
-      notifyCallbacks();
+      if (!authInfo) {
+        deferred.resolve(null);
+        return deferred.promise;
+      }
+      console.log(authInfo);
+      return $firebaseObject(usersRef.child(authInfo.uid)).$loaded();
     };
 
     UserBase.onSignInChange = function (callback) {
@@ -59,20 +42,27 @@
     };
 
     UserBase.clear = function () {
-      clearUser();
+      auth.$unauth();
     };
 
     UserBase.signInRequired = function () {
-      var deferred = $q.defer(),
-          user = getCurrentUser();
-
-      if (user) {
-        deferred.resolve(user);
-      } else {
-        deferred.reject('AUTH_REQUIRED');
-      }
-
-      return deferred.promise;
+      return auth.$requireAuth();
+      // return auth.$waitForAuth().then(function (authData) {
+      //   var deferred = $q.defer();
+      //
+      //   console.log('Wait for auth returned');
+      //   console.log(authData);
+      //   console.log('current user is:');
+      //   console.log(currentUser);
+      //
+      //   if (currentUser) {
+      //     deferred.resolve(currentUser);
+      //   } else {
+      //     deferred.reject('AUTH_REQUIRED');
+      //   }
+      //
+      //   return deferred.promise;
+      // });
     };
 
     return UserBase;

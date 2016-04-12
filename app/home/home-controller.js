@@ -14,11 +14,16 @@
 
   function HomeCtrl(currentUser, Item, $uibModal, ngToast) {
     var vm = this;
-
     vm.loading = true;
     vm.currentUser = currentUser;
     if (vm.currentUser) {
-      refreshStats();
+      console.log(vm.currentUser);
+      Item.getStats(vm.currentUser.$id).then(function (categories) {
+        vm.categories = categories;
+      })
+      .finally(function () {
+        vm.loading = false;
+      });
     }
 
     // Chart sample data
@@ -102,7 +107,7 @@
         }
       }).result.then(function (item) {
         popMessage(item);
-        refreshStats(item);
+        checkForPr(item);
       });
     };
 
@@ -110,21 +115,13 @@
       ngToast.info('Saved new ' + item.category.name + ' Try');
     }
 
-    function refreshStats(newItem) {
-      Item.getStats().then(function (categories) {
-        vm.categories = categories;
-        if (newItem) {
-          angular.forEach(categories, function (category) {
-            if (category.stats && category.stats.best._id === newItem._id) {
-              ngToast.success(
-                '<strong>Congratulations!</strong> That\'s a new ' + newItem.category.name + ' PR!'
-              );
-            }
-          });
+    function checkForPr(newItem) {
+      angular.forEach(vm.categories, function (category) {
+        if (category.stats && category.stats.best.$id === newItem.$id) {
+          ngToast.success(
+            '<strong>Congratulations!</strong> That\'s a new ' + newItem.category.name + ' PR!'
+          );
         }
-      })
-      .finally(function () {
-        vm.loading = false;
       });
     }
   }

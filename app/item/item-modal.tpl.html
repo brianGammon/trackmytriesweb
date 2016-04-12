@@ -4,7 +4,6 @@
   ng-submit="itemModal.save()"
   novalidate>
   <h4 class="modal-header">Record a Try: <strong>{{itemModal.item.category.name}}</strong></h4>
-
   <div class="modal-body top-buffer">
     <uib-alert data-ng-if="itemModal.errorMessage" type="danger" close="itemModal.errorMessage = null">
       {{itemModal.errorMessage}}
@@ -25,7 +24,7 @@
       </div>
     </div>
 
-    <div data-ng-if='itemModal.item.category.valueType === "number"'>
+    <div data-ng-if='itemModal.item.category.valueType === "count"'>
       <div class="form-group" show-errors>
         <label for="countScore" class="control-label">Number Completed</label>
         <input class="form-control"

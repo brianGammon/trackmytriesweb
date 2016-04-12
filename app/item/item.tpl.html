@@ -43,16 +43,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr data-ng-repeat='itm in item.items' ng-class="{success: itm._id == item.category.stats.best._id}">
+              <tr data-ng-repeat='itm in item.items | orderBy:"-itemDateTime"' ng-class="{success: itm.$id == item.category.stats.best[0].$id}">
                 <td>{{itm.itemDateTime | date:'MM-dd-yyyy'}}</td>
                 <td data-ng-if="item.category.valueType !== 'duration'">
-                  {{itm.valueNumber || 0}} <span data-ng-if='itm._id === item.category.stats.best._id' class="badge">PR</span>
+                  {{itm.valueNumber || 0}} <span data-ng-if='itm.$id === item.category.stats.best[0].$id' class="badge">PR</span>
                   <a class="btn btn-small" ng-if="itm.notes">
                     <span tooltip="{{itm.notes}}" class="visible-xs glyphicon glyphicon-comment" aria-hidden="true"></span>
                   </a>
                 </td>
                 <td data-ng-if="item.category.valueType === 'duration'">
-                  {{itm.valueNumber * 1000 | date:'mm:ss' : 'UTC' }} <span data-ng-if='itm._id === item.category.stats.best._id' class="badge">PR</span>
+                  {{itm.valueNumber * 1000 | date:'mm:ss' : 'UTC' }} <span data-ng-if='itm.$id === item.category.stats.best[0].$id' class="badge">PR</span>
                   <a class="btn btn-small" ng-if="itm.notes">
                     <span tooltip="{{itm.notes}}" class="visible-xs glyphicon glyphicon-comment" aria-hidden="true"></span>
                   </a>
@@ -64,7 +64,7 @@
                   <a class="btn btn-small" ng-click="item.edit(itm)">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                   </a>
-                  <a class="btn btn-small" ng-click="item.delete($index)">
+                  <a class="btn btn-small" ng-click="item.delete(itm)">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                   </a>
                 </td>

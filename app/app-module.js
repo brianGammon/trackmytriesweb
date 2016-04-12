@@ -12,6 +12,7 @@
       'ui.bootstrap',
       'ngStorage',
       'ngMessages',
+      'firebase',
       'ngToast',
       'home',
       'about',

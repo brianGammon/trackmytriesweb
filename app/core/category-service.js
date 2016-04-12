@@ -12,22 +12,17 @@
     .module('core')
     .factory('Category', Category);
 
-  function Category($http, API) {
+  function Category($firebaseArray, $firebaseObject, $window) {
     // The object to be returned
-    var CategoryBase = {};
+    var CategoryBase = {},
+        categoriesRef = new $window.Firebase('https://trackmytries-dev.firebaseio.com/categories');
 
     CategoryBase.getCategories = function () {
-      return $http.get(API + '/categories')
-        .then(function (result) {
-          return result.data;
-        });
+      return $firebaseArray(categoriesRef);
     };
 
     CategoryBase.getCategory = function (categoryId) {
-      return $http.get(API + '/categories/' + categoryId)
-        .then(function (result) {
-          return result.data;
-        });
+      return $firebaseObject(categoriesRef.child(categoryId));
     };
 
     // Giving back the object to the caller

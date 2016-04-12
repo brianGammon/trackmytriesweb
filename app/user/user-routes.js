@@ -11,13 +11,23 @@
         url: '/signup',
         templateUrl: 'user/signup.tpl.html',
         controller: 'UserCtrl',
-        controllerAs: 'user'
+        controllerAs: 'user',
+        resolve: {
+          currentUser: function () {
+            return null;
+          }
+        }
       })
       .state('signin', {
         url: '/signin',
         templateUrl: 'user/signin.tpl.html',
         controller: 'UserCtrl',
-        controllerAs: 'user'
+        controllerAs: 'user',
+        resolve: {
+          currentUser: function () {
+            return null;
+          }
+        }
       })
       .state('password', {
         url: '/password',
@@ -26,7 +36,9 @@
         controllerAs: 'user',
         resolve: {
           currentUser: ['User', function (User) {
-            return User.signInRequired();
+            return User.signInRequired().then(function () {
+              return User.getUser();
+            });
           }]
         }
       });

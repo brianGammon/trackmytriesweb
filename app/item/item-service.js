@@ -12,50 +12,106 @@
     .module('item')
     .factory('Item', Item);
 
-  function Item($http, API) {
-    var ItemBase = {};
+  function Item($q, $firebaseArray, $firebaseObject, $window) {
+    var ItemBase = {},
+        rootRef = new $window.Firebase('https://trackmytries-dev.firebaseio.com'),
+        userItemsRef = rootRef.child('userItems');
 
-    function onSuccess(result) {
-      return result.data;
-    }
+    ItemBase.getStatsByCategory = function (uid, category) {
+      var stats = {};
 
-    ItemBase.getStatsByCategory = function (categoryId) {
-      return $http.get(API + '/items/stats', {
-        params: {categoryId: categoryId}
-      }).then(onSuccess);
+      if (category.goalType === 'least') {
+        stats.best = $firebaseArray(getUserItemsRef(uid).child(category.$id)
+          .orderByChild('valueNumber').limitToFirst(1));
+      } else {
+        stats.best = $firebaseArray(getUserItemsRef(uid).child(category.$id)
+          .orderByChild('valueNumber').limitToLast(1));
+      }
+
+      stats.latest = $firebaseArray(getUserItemsRef(uid).child(category.$id)
+        .orderByChild('itemDateTime').limitToLast(1));
+      stats.first = $firebaseArray(getUserItemsRef(uid).child(category.$id)
+        .orderByChild('itemDateTime').limitToFirst(1));
+      return stats;
     };
 
-    ItemBase.getStats = function () {
-      return $http.get(API + '/items/stats')
-        .then(onSuccess);
+    ItemBase.getStats = function (uid) {
+      // Get a list of category keys
+      var deferred = $q.defer();
+
+      $firebaseArray(rootRef.child('categories')).$loaded().then(function (categories) {
+        console.log(categories);
+        angular.forEach(categories, function (category) {
+          category.stats = {};
+
+          if (category.goalType === 'most') {
+            category.stats.best = $firebaseArray(getUserItemsRef(uid).child(category.$id).orderByChild('valueNumber')
+              .limitToLast(1));
+          } else {
+            category.stats.best = $firebaseArray(getUserItemsRef(uid).child(category.$id).orderByChild('valueNumber')
+              .limitToFirst(1));
+          }
+
+          category.stats.latest = $firebaseArray(getUserItemsRef(uid).child(category.$id).orderByChild('itemDateTime')
+            .limitToLast(1));
+          category.stats.first = $firebaseArray(getUserItemsRef(uid).child(category.$id).orderByChild('itemDateTime')
+            .limitToFirst(1));
+          console.log('doing foreach');
+        });
+        console.log('resolving deferred');
+        deferred.resolve(categories);
+      });
+
+      // for each one, run the 3 stats queries and attach an array
+      // return $http.get(API + '/items/stats')
+      //   .then(onSuccess);
+      return deferred.promise;
     };
 
-    ItemBase.getItems = function (categoryId) {
-      return $http.get(API + '/items', {
-        params: {categoryId: categoryId}
-      }).then(onSuccess);
+    // ItemBase.getItems = function (categoryId) {
+    //   return $http.get(API + '/items', {
+    //     params: {categoryId: categoryId}
+    //   }).then(onSuccess);
+    // };
+
+    ItemBase.getItems = function (uid, categoryId) {
+      // b5385492-7a8c-41c2-875e-ada21dd0c8d4/--KF1vDSZUeLSheoTCcT8')
+      return $firebaseArray(getUserItemsRef(uid).child(categoryId));
     };
 
-    ItemBase.getItemById = function (itemId) {
-      return $http.get(API + '/items/' + itemId)
-        .then(onSuccess);
+    // ItemBase.getItemById = function (itemId) {
+    //   return $http.get(API + '/items/' + itemId)
+    //     .then(onSuccess);
+    // };
+
+    ItemBase.updateItem = function (uid, item) {
+      console.log(item);
+      return getUserItemsRef(uid).child(item.category.$id).child(item.$id).update({
+        itemDateTime: item.itemDateTime.toJSON(),
+        valueNumber: item.valueNumber,
+        notes: item.notes ? item.notes : null
+      });
     };
 
-    ItemBase.updateItem = function (item) {
-      return $http.put(API + '/items/' + item._id, item)
-        .then(onSuccess);
+    ItemBase.addItem = function (uid, item) {
+      console.log(item);
+      return getUserItemsRef(uid).child(item.category.$id).push({
+        itemDateTime: item.itemDateTime.toJSON(),
+        valueNumber: item.valueNumber,
+        notes: item.notes ? item.notes : null
+      }).then(function (data) {
+        console.log(data);
+      });
     };
 
-    ItemBase.addItem = function (item) {
-      return $http.post(API + '/items', item)
-        .then(onSuccess);
-    };
-
-    ItemBase.deleteItem = function (itemId) {
-      return $http.delete(API + '/items/' + itemId)
-        .then(onSuccess);
+    ItemBase.deleteItem = function (uid, categoryId, itemId) {
+      return getUserItemsRef(uid).child(categoryId).child(itemId).set(null);
     };
 
     return ItemBase;
+
+    function getUserItemsRef(uid) {
+      return userItemsRef.child(uid);
+    }
   }
 }());

@@ -13,29 +13,53 @@
     .controller('ItemCtrl', ItemCtrl);
 
   /* eslint max-params: [2,8] */
-  function ItemCtrl(Item, currentUser, $stateParams, $filter, $uibModal, $window, ngToast) {
+  function ItemCtrl(Category, Item, currentUser, $stateParams, $filter, $uibModal, $window) {
     var vm = this,
         categoryId = $stateParams.categoryId;
 
     vm.loading = true;
-    Item.getStatsByCategory(categoryId)
-      .then(function (category) {
-        vm.category = category;
 
-        Item.getItems(categoryId)
-          .then(function (items) {
-            vm.items = items;
-            if (items.length > 0) {
-              initChart();
-              refreshChartData();
-            }
-          })
-          .catch(onError);
-      })
-      .catch(onError)
-      .finally(function () {
-        vm.loading = false;
-      });
+    Category.getCategory(categoryId).$loaded(function (category) {
+      vm.category = category;
+      vm.category.stats = Item.getStatsByCategory(currentUser.$id, category);
+
+      Item.getItems(currentUser.$id, categoryId).$loaded()
+        .then(function (items) {
+          vm.items = items;
+          vm.items.$watch(function () {
+            console.log('items changed');
+            initChart();
+            refreshChartData();
+          });
+          if (items.length > 0) {
+            initChart();
+            refreshChartData();
+          }
+        })
+        .catch(onError)
+        .finally(function () {
+          vm.loading = false;
+        });
+    });
+
+    // Item.getStatsByCategory(categoryId)
+    //   .then(function (category) {
+    //     vm.category = category;
+    //
+    //     Item.getItems(categoryId)
+    //       .then(function (items) {
+    //         vm.items = items;
+    //         if (items.length > 0) {
+    //           initChart();
+    //           refreshChartData();
+    //         }
+    //       })
+    //       .catch(onError);
+    //   })
+    //   .catch(onError)
+    //   .finally(function () {
+    //     vm.loading = false;
+    //   });
 
     vm.edit = function (item) {
       $uibModal.open({
@@ -47,25 +71,26 @@
             return currentUser;
           },
           category: function () {
-            return item.category;
+            return vm.category;
           },
           item: function () {
             return angular.copy(item);
           }
         }
       }).result.then(function (updatedItem) {
-        var key;
-
-        // Map the updated copy to the original object
-        for (key in updatedItem) {
-          // Manually set notes in case original item didn't have any
-          if (item.hasOwnProperty(key) || key === 'notes') {
-            item[key] = updatedItem[key];
-          }
-        }
-
-        refreshChartData();
-        refreshStats();
+        console.log(updatedItem);
+        // var key;
+        //
+        // // Map the updated copy to the original object
+        // for (key in updatedItem) {
+        //   // Manually set notes in case original item didn't have any
+        //   if (item.hasOwnProperty(key) || key === 'notes') {
+        //     item[key] = updatedItem[key];
+        //   }
+        // }
+        //
+        // refreshChartData();
+        // refreshStats();
       });
     };
 
@@ -86,19 +111,22 @@
           }
         }
       }).result.then(function (savedItem) {
-        vm.items.push(savedItem);
-        refreshChartData();
-        refreshStats(savedItem);
+        console.log(savedItem);
+        // vm.items.push(savedItem);
+        // refreshChartData();
+        // refreshStats(savedItem);
       });
     };
 
-    vm.delete = function (index) {
+    vm.delete = function (item) {
       if ($window.confirm('Are you sure? Click OK to delete this Try.') === true) {
-        Item.deleteItem(vm.items[index]._id)
+        console.log(item);
+        console.log(vm.category);
+        Item.deleteItem(currentUser.$id, vm.category.$id, item.$id)
           .then(function () {
-            vm.items.splice(index, 1);
-            refreshChartData();
-            refreshStats();
+            // vm.items.splice(index, 1);
+            // refreshChartData();
+            // refreshStats();
           })
           .catch(function (err) {
             onError(err);
@@ -106,46 +134,47 @@
       }
     };
 
-    function refreshStats(newItem) {
-      Item.getStatsByCategory(categoryId)
-        .then(function (result) {
-          vm.category = result;
-
-          // If a new item was saved and passed in check if a message should be popped
-          if (vm.items.length > 1 && newItem && newItem._id === result.stats.best._id) {
-            ngToast.success('<strong>Congratulations!</strong> That\'s a new ' + result.name + ' PR!');
-          }
-        })
-        .catch(onError);
-    }
+    // function refreshStats(newItem) {
+    //   Item.getStatsByCategory(categoryId)
+    //     .then(function (result) {
+    //       vm.category = result;
+    //
+    //       // If a new item was saved and passed in check if a message should be popped
+    //       if (vm.items.length > 1 && newItem && newItem._id === result.stats.best[0]._id) {
+    //         ngToast.success('<strong>Congratulations!</strong> That\'s a new ' + result.name + ' PR!');
+    //       }
+    //     })
+    //     .catch(onError);
+    // }
 
     function refreshChartData() {
-      var chartSeries1 = [];
+      var itemsCopy,
+          chartSeries1 = [];
 
       // Sort the items array by date, descending
-      vm.items = $filter('orderBy')(vm.items, 'itemDateTime', true);
+      itemsCopy = $filter('orderBy')(angular.copy(vm.items), 'itemDateTime', true);
 
-      angular.forEach(vm.items, function (value) {
+      angular.forEach(itemsCopy, function (item) {
         // Date fix for view
-        var d = new Date(value.itemDateTime);
-        value.itemDateTime = d;
+        var d = new Date(item.itemDateTime);
+        // value.itemDateTime = d;
 
         // var yy = $filter('date')(value.itemDateTime, 'yyyy');
         // chartSeries1.push([Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()), value.valueNumber]);
-        chartSeries1.push([$filter('date')(value.itemDateTime, 'shortDate'), value.valueNumber]);
+        chartSeries1.push([$filter('date')(d, 'shortDate'), item.valueNumber]);
       });
 
       vm.chartConfig.series[0].data = chartSeries1.reverse();
     }
 
     function initChart() {
-      var latestTry = vm.category.stats.latest.valueNumber,
+      var latestTry = vm.category.stats.latest[0].valueNumber,
           seriesName = vm.category.valueType === 'duration' ? 'Time in MM:SS' : 'Number completed',
           goalLabel = 'Goal: ' + (latestTry + 1),
           minY = null;
 
       if (vm.category.goalType === 'less') {
-        minY = Math.round(vm.category.stats.best.valueNumber * 0.95, 0);
+        minY = Math.round(vm.category.stats.best[0].valueNumber * 0.95, 0);
       }
 
       if (vm.category.valueType === 'duration') {

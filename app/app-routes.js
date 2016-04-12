@@ -11,6 +11,7 @@
           if (error === 'AUTH_REQUIRED') {
             $state.go('signin');
           }
+          console.log('state change error');
         });
       $rootScope.$on('$destroy', onStateChangeError);
     });

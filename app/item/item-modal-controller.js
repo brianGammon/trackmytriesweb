@@ -19,8 +19,8 @@
 
     if (!item) {
       // Default new item to the value of the last one, if supplied
-      if (category.stats) {
-        defaultValue = category.stats.latest.valueNumber;
+      if (category.stats.latest.length > 0) {
+        defaultValue = category.stats.latest[0].valueNumber;
       }
       vm.item = {};
       vm.item.user = currentUser;
@@ -29,6 +29,8 @@
       vm.item.category = category;
     } else {
       vm.item = item;
+      vm.item.itemDateTime = new Date(item.itemDateTime);
+      vm.item.category = category;
     }
 
     // if this is a duration category, convert the valueNumber to a date
@@ -64,11 +66,11 @@
       if (vm.form.$valid && !vm.durationError) {
         if (item) {
           // An item was passed in, so this is an update
-          Item.updateItem(vm.item)
+          Item.updateItem(currentUser.$id, vm.item)
             .then(onSuccess)
             .catch(onError);
         } else {
-          Item.addItem(vm.item)
+          Item.addItem(currentUser.$id, vm.item)
             .then(onSuccess)
             .catch(onError);
         }
@@ -78,9 +80,9 @@
     function onSuccess(result) {
       if (result) {
         // Date fix for view
-        result.itemDateTime = new Date(result.itemDateTime);
+        // result.itemDateTime = new Date(result.itemDateTime);
         // Put the populated category back
-        result.category = vm.item.category;
+        // result.category = vm.item.category;
         $uibModalInstance.close(result);
       }
 

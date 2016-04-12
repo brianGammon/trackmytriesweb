@@ -12,7 +12,7 @@
     .module('user')
     .controller('UserCtrl', UserCtrl);
 
-  function UserCtrl(Auth, $state, $scope) {
+  function UserCtrl(currentUser, Auth, $state, $scope) {
     var vm = this;
 
     vm.signIn = function (credentials) {
@@ -20,6 +20,16 @@
 
       if (vm.loginForm.$valid) {
         Auth.signIn(credentials)
+          .then(onSuccess)
+          .catch(onError);
+      }
+    };
+
+    vm.signInFb = function (credentials) {
+      $scope.$broadcast('show-errors-check-validity');
+
+      if (vm.loginForm.$valid) {
+        Auth.signInFb(credentials)
           .then(onSuccess)
           .catch(onError);
       }
@@ -35,10 +45,26 @@
       }
     };
 
+    vm.signUpFb = function (credentials) {
+      $scope.$broadcast('show-errors-check-validity');
+
+      if (vm.loginForm.$valid) {
+        Auth.signUpFb(credentials)
+          .then(function () {
+            $state.go('about');
+          })
+          .catch(function (err) {
+            console.log(err);
+            vm.errorMessage = err.message ? err.message : err;
+          });
+      }
+    };
+
     vm.changePassword = function (credentials) {
       $scope.$broadcast('show-errors-check-validity');
 
       if (vm.loginForm.$valid) {
+        credentials.email = currentUser.email;
         Auth.changePassword(credentials)
           .then(onSuccess)
           .catch(onError);
@@ -46,12 +72,13 @@
     };
 
     function onSuccess() {
+      console.log('user event successful');
       $state.go('home');
     }
 
     function onError(err) {
       console.log(err);
-      vm.errorMessage = err.data ? err.data : 'An unknown error has occurred';
+      vm.errorMessage = err.message ? err.message : 'An unknown error has occurred';
     }
   }
 }());
