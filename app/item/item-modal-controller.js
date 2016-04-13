@@ -77,17 +77,13 @@
       }
     };
 
-    function onSuccess(result) {
-      if (result) {
-        // Date fix for view
-        // result.itemDateTime = new Date(result.itemDateTime);
-        // Put the populated category back
-        // result.category = vm.item.category;
-        $uibModalInstance.close(result);
+    function onSuccess() {
+      if (vm.item) {
+        $uibModalInstance.close(vm.item);
+      } else {
+        // If no result, then authorization probably failed
+        $uibModalInstance.dismiss();
       }
-
-      // If no result, then authorization probably failed
-      $uibModalInstance.dismiss();
     }
 
     function onError(err) {

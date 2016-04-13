@@ -4,7 +4,7 @@
       <form
         role="form"
         name="user.loginForm"
-        data-ng-submit="user.signUpFb(user.credentials)"
+        data-ng-submit="user.signUp(user.credentials)"
         novalidate>
         <fieldset>
           <legend>Sign Up</legend>
@@ -78,5 +78,7 @@
       </form>
     </div>
   </div>
-  <facebook-login/>
+  <button type="button" class="btn btn-primary" data-ng-click="user.facebookSignIn()">
+    <i class="fa fa-facebook-official fa-2x"></i> Sign up with Facebook
+  </button>
 </div>

@@ -15,31 +15,17 @@
   function Auth($http, $window, User, $firebaseAuth) {
     var AuthBase = {},
         ref = new $window.Firebase('https://trackmytries-dev.firebaseio.com/'),
-        usersRef = ref.child('users'),
+        usersRef = ref.child('userProfiles'),
         auth = $firebaseAuth(ref);
 
-    // AuthBase.signIn = function (credentials) {
-    //   return $http.post(API + '/user/signin', credentials)
-    //     .then(function (result) {
-    //       User.setUser(result.data);
-    //     });
-    // };
-
-    AuthBase.signInFb = function (credentials) {
+    AuthBase.signIn = function (credentials) {
       return auth.$authWithPassword({
         email: credentials.email,
         password: credentials.password
-      });
+      }).then(updateUserProfile);
     };
 
-    // AuthBase.signUp = function (credentials) {
-    //   return $http.post(API + '/user/signup', credentials)
-    //     .then(function (result) {
-    //       User.setUser(result.data);
-    //     });
-    // };
-
-    AuthBase.signUpFb = function (credentials) {
+    AuthBase.signUp = function (credentials) {
       // Create the firebase account
       return auth.$createUser({
         email: credentials.email,
@@ -49,18 +35,15 @@
         return auth.$authWithPassword({
           email: credentials.email,
           password: credentials.password
-        }).then(function (userInfo) {
+        }).then(function (authInfo) {
           // If sign in was ok, then create a user profile
-          return usersRef.child(userInfo.uid).set({
-            name: credentials.name,
-            email: credentials.email
-          });
+          authInfo.name = credentials.name;
+          return updateUserProfile(authInfo);
         });
       });
     };
 
     AuthBase.changePassword = function (credentials) {
-      console.log(credentials);
       return auth.$changePassword({
         email: credentials.email,
         oldPassword: credentials.currentPassword,
@@ -68,12 +51,39 @@
       });
     };
 
-    // AuthBase.fbSignIn = function (fbAuthResponse) {
-    //   return $http.post(API + '/user/auth/fb', fbAuthResponse)
-    //     .then(function (result) {
-    //       User.setUser(result.data);
-    //     });
-    // };
+    AuthBase.fbSignIn = function () {
+      return auth.$authWithOAuthPopup('facebook')
+        .then(updateUserProfile);
+    };
+
+    function updateUserProfile(authInfo) {
+      var userProfile = {
+        provider: authInfo.provider
+      };
+
+      switch (authInfo.provider) {
+        case 'password':
+          if (authInfo.name) {
+            userProfile.name = authInfo.name;
+          }
+          userProfile.email = authInfo.password.email;
+          userProfile.providerData = {
+            isTemporaryPassword: authInfo.password.isTemporaryPassword,
+            profileImageUrl: authInfo.password.profileImageURL
+          };
+          break;
+        case 'facebook':
+          userProfile.name = authInfo.facebook.displayName;
+          userProfile.providerData = {
+            profileImageUrl: authInfo.facebook.profileImageURL,
+            accessToken: authInfo.facebook.accessToken
+          };
+          break;
+        default:
+          throw new Error('Unsupported auth provider: ' + authInfo.provider);
+      }
+      return usersRef.child(authInfo.uid).update(userProfile);
+    }
 
     return AuthBase;
   }

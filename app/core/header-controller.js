@@ -18,7 +18,6 @@
 
     User.getUser().then(function (user) {
       // Grab our current user and start listening for sign in changes
-      console.log(user);
       vm.currentUser = user;
       User.onSignInChange(updateUser);
     });

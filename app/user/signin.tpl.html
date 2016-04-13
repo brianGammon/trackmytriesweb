@@ -4,7 +4,7 @@
       <form
         role="form"
         name="user.loginForm"
-        ng-submit="user.signInFb(user.credentials)"
+        ng-submit="user.signIn(user.credentials)"
         novalidate>
         <fieldset>
           <legend>Sign In</legend>
@@ -41,6 +41,7 @@
 
           <div class='form-group'>
             <button class="btn btn-primary" type="submit">Sign In</button>
+
           </div>
 
           <p>Don't have an account yet? <a data-ui-sref="signup">Sign up here</a></p>
@@ -48,5 +49,7 @@
       </form>
     </div>
   </div>
-  <facebook-login/>
+  <button type="button" class="btn btn-primary" data-ng-click="user.facebookSignIn()">
+    <i class="fa fa-facebook-official fa-2x"></i> Login with Facebook
+  </button>
 </div>

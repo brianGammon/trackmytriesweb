@@ -16,7 +16,7 @@
     var UserBase = {},
         callbacks = [],
         ref = new $window.Firebase('https://trackmytries-dev.firebaseio.com/'),
-        usersRef = ref.child('users'),
+        usersRef = ref.child('userProfiles'),
         auth = $firebaseAuth(ref);
 
     auth.$onAuth(function () {
@@ -33,7 +33,6 @@
         deferred.resolve(null);
         return deferred.promise;
       }
-      console.log(authInfo);
       return $firebaseObject(usersRef.child(authInfo.uid)).$loaded();
     };
 

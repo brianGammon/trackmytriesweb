@@ -40,7 +40,6 @@
       var deferred = $q.defer();
 
       $firebaseArray(rootRef.child('categories')).$loaded().then(function (categories) {
-        console.log(categories);
         angular.forEach(categories, function (category) {
           category.stats = {};
 
@@ -56,33 +55,18 @@
             .limitToLast(1));
           category.stats.first = $firebaseArray(getUserItemsRef(uid).child(category.$id).orderByChild('itemDateTime')
             .limitToFirst(1));
-          console.log('doing foreach');
         });
-        console.log('resolving deferred');
+
         deferred.resolve(categories);
       });
 
-      // for each one, run the 3 stats queries and attach an array
-      // return $http.get(API + '/items/stats')
-      //   .then(onSuccess);
       return deferred.promise;
     };
-
-    // ItemBase.getItems = function (categoryId) {
-    //   return $http.get(API + '/items', {
-    //     params: {categoryId: categoryId}
-    //   }).then(onSuccess);
-    // };
 
     ItemBase.getItems = function (uid, categoryId) {
       // b5385492-7a8c-41c2-875e-ada21dd0c8d4/--KF1vDSZUeLSheoTCcT8')
       return $firebaseArray(getUserItemsRef(uid).child(categoryId));
     };
-
-    // ItemBase.getItemById = function (itemId) {
-    //   return $http.get(API + '/items/' + itemId)
-    //     .then(onSuccess);
-    // };
 
     ItemBase.updateItem = function (uid, item) {
       console.log(item);

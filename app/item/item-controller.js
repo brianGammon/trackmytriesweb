@@ -13,8 +13,9 @@
     .controller('ItemCtrl', ItemCtrl);
 
   /* eslint max-params: [2,8] */
-  function ItemCtrl(Category, Item, currentUser, $stateParams, $filter, $uibModal, $window) {
+  function ItemCtrl(Category, Item, currentUser, $stateParams, $filter, $uibModal, $window, ngToast) {
     var vm = this,
+        chartInit = false,
         categoryId = $stateParams.categoryId;
 
     vm.loading = true;
@@ -28,7 +29,9 @@
           vm.items = items;
           vm.items.$watch(function () {
             console.log('items changed');
-            initChart();
+            if (!chartInit) {
+              initChart();
+            }
             refreshChartData();
           });
           if (items.length > 0) {
@@ -41,25 +44,6 @@
           vm.loading = false;
         });
     });
-
-    // Item.getStatsByCategory(categoryId)
-    //   .then(function (category) {
-    //     vm.category = category;
-    //
-    //     Item.getItems(categoryId)
-    //       .then(function (items) {
-    //         vm.items = items;
-    //         if (items.length > 0) {
-    //           initChart();
-    //           refreshChartData();
-    //         }
-    //       })
-    //       .catch(onError);
-    //   })
-    //   .catch(onError)
-    //   .finally(function () {
-    //     vm.loading = false;
-    //   });
 
     vm.edit = function (item) {
       $uibModal.open({
@@ -95,6 +79,8 @@
     };
 
     vm.addNew = function (category) {
+      var priorBest = category.stats.best[0].$id;
+
       $uibModal.open({
         templateUrl: 'item/item-modal.tpl.html',
         controller: 'ItemModalCtrl',
@@ -110,11 +96,10 @@
             return null;
           }
         }
-      }).result.then(function (savedItem) {
-        console.log(savedItem);
-        // vm.items.push(savedItem);
-        // refreshChartData();
-        // refreshStats(savedItem);
+      }).result.then(function () {
+        if (category.stats.best[0].$id !== priorBest) {
+          ngToast.success('<strong>Congratulations!</strong> That\'s a new ' + category.name + ' PR!');
+        }
       });
     };
 
@@ -123,29 +108,11 @@
         console.log(item);
         console.log(vm.category);
         Item.deleteItem(currentUser.$id, vm.category.$id, item.$id)
-          .then(function () {
-            // vm.items.splice(index, 1);
-            // refreshChartData();
-            // refreshStats();
-          })
           .catch(function (err) {
             onError(err);
           });
       }
     };
-
-    // function refreshStats(newItem) {
-    //   Item.getStatsByCategory(categoryId)
-    //     .then(function (result) {
-    //       vm.category = result;
-    //
-    //       // If a new item was saved and passed in check if a message should be popped
-    //       if (vm.items.length > 1 && newItem && newItem._id === result.stats.best[0]._id) {
-    //         ngToast.success('<strong>Congratulations!</strong> That\'s a new ' + result.name + ' PR!');
-    //       }
-    //     })
-    //     .catch(onError);
-    // }
 
     function refreshChartData() {
       var itemsCopy,
@@ -165,6 +132,10 @@
       });
 
       vm.chartConfig.series[0].data = chartSeries1.reverse();
+    }
+
+    function onError(err) {
+      vm.errorMessage = err.message ? err.message : 'An unknown error has occurred';
     }
 
     function initChart() {
@@ -236,10 +207,8 @@
           type: 'category'
         }
       };
-    }
 
-    function onError(err) {
-      vm.errorMessage = err.data ? err.data : 'An unknown error has occurred';
+      chartInit = true;
     }
 
     function secondsToHms(d) {
