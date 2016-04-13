@@ -1,0 +1,30 @@
+[  
+  {
+    "user": "b@trackmytries.com",
+    "category": "Pull Ups",
+    "itemDateTime": "2015-05-13T05:00:00Z",
+    "valueNumber": 3,
+    "notes": "Did 3.5"
+  },
+  {
+    "user": "b@trackmytries.com",
+    "category": "Push Ups",
+    "itemDateTime": "2012-08-06T05:00:00Z",
+    "valueNumber": 20,
+    "notes": ""
+  },
+  {
+    "user": "b@trackmytries.com",
+    "category": "Sit Ups",
+    "itemDateTime": "2012-08-06T05:00:00Z",
+    "valueNumber": 4,
+    "notes": ""
+  },
+  {
+    "user": "r@trackmytries.com",
+    "category": "Pull Ups",
+    "itemDateTime": "2015-05-13T05:00:00Z",
+    "valueNumber": 3,
+    "notes": "Did 3.5"
+  }
+]
