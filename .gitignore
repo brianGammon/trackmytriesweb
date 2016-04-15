@@ -31,3 +31,6 @@ logs
 pids
 *.pid
 *.seed
+
+# nconf
+env.json
